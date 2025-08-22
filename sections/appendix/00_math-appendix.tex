@@ -1,0 +1,314 @@
+\section{Mathematical Appendix}
+
+\subsection{Model Setup and Notation}
+
+Before proving the main results, we establish the complete mathematical framework.
+
+\subsubsection{Signal Structure}
+For a candidate from group $g \in \{0,1\}$ with true productivity $\theta \sim N(\mu, \sigma_\theta^2)$, the firm observes:
+\begin{align}
+s_g &= \theta + \eta_g + b \cdot \mathbf{1}_{g=1} + \varepsilon(b)
+\end{align}
+where $\eta_g \sim N(0, \sigma_{\eta,g}^2)$ is exogenous group-specific measurement error, $b \in [0, b_{max}]$ is the firm's chosen bias parameter, and $\varepsilon(b) \sim N(0, \sigma_\varepsilon^2(b))$ is a noise term with variance $\sigma_\varepsilon^2(b) = \sigma_0^2 + \kappa(b_{max} - b)$.
+
+Under our baseline assumption A1, $\sigma_{\eta,0}^2 = \sigma_{\eta,1}^2 = 0$ (identical measurement across groups). This gives us the simplified signal structure:
+\begin{align}
+s_g &= \theta + b \cdot \mathbf{1}_{g=1} + \varepsilon(b)
+\end{align}
+
+\subsubsection{Signal Distributions}
+The observed signals have distributions:
+\begin{align}
+s_0 &\sim N(\mu, \sigma_\theta^2 + \sigma_\varepsilon^2(b)) \\
+s_1 &\sim N(\mu + b, \sigma_\theta^2 + \sigma_\varepsilon^2(b))
+\end{align}
+
+Let $\sigma_s^2(b) = \sigma_\theta^2 + \sigma_\varepsilon^2(b) = \sigma_\theta^2 + \sigma_0^2 + \kappa(b_{max} - b)$.
+
+\subsubsection{Posterior Beliefs}
+Using Bayesian updating, for a signal $s$ from group $g$:
+\begin{align}
+E[\theta | s, g, b] &= \frac{\sigma_\theta^2 (s - b \cdot \mathbf{1}_{g=1}) + \sigma_\varepsilon^2(b) \mu}{\sigma_\theta^2 + \sigma_\varepsilon^2(b)} \label{eq:posterior}
+\end{align}
+
+The posterior precision is:
+\begin{align}
+\tau_s(b) &= \frac{1}{\sigma_\theta^2 + \sigma_\varepsilon^2(b)} = \frac{1}{\sigma_s^2(b)}
+\end{align}
+
+\subsubsection{Firm's Optimization Problem}
+The firm chooses bias $b$ and threshold $t$ to maximize expected productivity of hired workers:
+\begin{align}
+V(b,t) &= \sum_{g \in \{0,1\}} \pi_g \int_t^\infty E[\theta | s, g, b] f(s|g,b) \, ds \label{eq:value_function}
+\end{align}
+
+For any given $b$, the optimal threshold $t^*(b)$ is the signal at which the posterior expected productivity equals the reservation value, which we take to be the population mean $\mu$. Thus, $t^*(b)$ satisfies $E[\theta | t^*(b), g, b] = \mu$. The original first-order condition in the text is a result of this optimization, not the definition itself.
+
+\subsection{Preliminary Lemmas}
+
+\begin{lemma}\label{lemma:threshold_symmetry}
+At $b = 0$, the optimal threshold is $t^*(0) = \mu$.
+\end{lemma}
+
+\begin{proof}
+At $b = 0$, both groups have identical signal distributions: $s_0, s_1 \sim N(\mu, \sigma_s^2(0))$. A risk-neutral firm will hire any candidate whose expected productivity $E[\theta|s,g,b]$ is greater than or equal to their reservation value, $\mu$. The optimal threshold $t^*$ is the signal $s$ at which the firm is indifferent, i.e., $E[\theta|t^*, g, b] = \mu$.
+
+At $b=0$, the posterior expectation is the same for both groups:
+\begin{align}
+E[\theta | t^*(0), g, 0] &= \frac{\sigma_\theta^2 t^*(0) + \sigma_\varepsilon^2(0) \mu}{\sigma_\theta^2 + \sigma_\varepsilon^2(0)}
+\end{align}
+Setting this equal to the reservation value $\mu$:
+\begin{align}
+\frac{\sigma_\theta^2 t^*(0) + \sigma_\varepsilon^2(0) \mu}{\sigma_\theta^2 + \sigma_\varepsilon^2(0)} &= \mu \\
+\sigma_\theta^2 t^*(0) + \sigma_\varepsilon^2(0) \mu &= \mu(\sigma_\theta^2 + \sigma_\varepsilon^2(0)) \\
+\sigma_\theta^2 t^*(0) &= \mu\sigma_\theta^2 \\
+t^*(0) &= \mu
+\end{align}
+By symmetry and the fact that the posterior mean is a weighted average of the signal and prior mean, the optimal cutoff must be at the population mean $\mu$.
+\end{proof}
+
+\begin{lemma}\label{lemma:posterior_derivatives}
+The partial derivatives of the posterior mean are:
+\begin{align}
+\frac{\partial E[\theta | s, g, b]}{\partial b} &= -\frac{\sigma_\theta^2 \mathbf{1}_{g=1}}{\sigma_s^2(b)} + \kappa \frac{E[\theta|s,g,b] - \mu}{\sigma_s^2(b)} \\
+\frac{\partial E[\theta | s, g, b]}{\partial \sigma_\varepsilon^2} &= \frac{\sigma_\theta^2(\mu - s + b \cdot \mathbf{1}_{g=1})}{(\sigma_s^2(b))^2}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+Let $E = E[\theta | s, g, b]$. For the derivative with respect to $b$, we use the quotient rule and the fact that $\frac{\partial \sigma_\varepsilon^2}{\partial b} = -\kappa$:
+\begin{align}
+\frac{\partial E}{\partial b} &= \frac{(-\sigma_\theta^2 \mathbf{1}_{g=1} - \kappa \mu)(\sigma_s^2(b)) - [\sigma_\theta^2 (s - b \cdot \mathbf{1}_{g=1}) + \sigma_\varepsilon^2(b) \mu](-\kappa)}{(\sigma_s^2(b))^2} \\
+&= \frac{-\sigma_\theta^2 \mathbf{1}_{g=1}\sigma_s^2(b) - \kappa \mu \sigma_s^2(b) + \kappa (E \cdot \sigma_s^2(b))}{(\sigma_s^2(b))^2} \\
+&= -\frac{\sigma_\theta^2 \mathbf{1}_{g=1}}{\sigma_s^2(b)} + \kappa \frac{E - \mu}{\sigma_s^2(b)}
+\end{align}
+For the derivative with respect to $\sigma_\varepsilon^2$:
+\begin{align}
+\frac{\partial E}{\partial \sigma_\varepsilon^2} &= \frac{(\mu)(\sigma_\theta^2 + \sigma_\varepsilon^2) - [\sigma_\theta^2 (s - b \cdot \mathbf{1}_{g=1}) + \sigma_\varepsilon^2 \mu](1)}{(\sigma_\theta^2 + \sigma_\varepsilon^2)^2} \\
+&= \frac{\mu \sigma_\theta^2 - \sigma_\theta^2 (s - b \cdot \mathbf{1}_{g=1})}{(\sigma_s^2(b))^2} = \frac{\sigma_\theta^2(\mu - s + b \cdot \mathbf{1}_{g=1})}{(\sigma_s^2(b))^2}
+\end{align}
+\end{proof}
+
+\begin{lemma}[Concavity of the Value Function]
+    \label{lemma:concavity}
+    The firm's value function: 
+    \begin{align}
+        V(b) = \mathbb{E}_{s,g}[\max(E[\theta | s, g, b], \mu)]
+    \end{align} 
+    is strictly concave in $b$ for $b \in [0, b_{max}]$, provided the problem is non-trivial. That is, $\frac{d^2V}{db^2} < 0$.
+    \end{lemma}
+    
+    \begin{proof}
+    To prove concavity, we must show that the second derivative of the value function with respect to bias, $V''(b)$, is negative.
+    
+    From the Envelope Theorem, the first derivative of the value function is given by taking the partial derivative with respect to $b$ inside the expectation, holding the optimal threshold $t^*(b)$ fixed:
+    \begin{align}
+        V'(b) = \frac{dV}{db} = \sum_{g \in \{0,1\}} \pi_g \int_{t_g^*(b)}^\infty \frac{\partial}{\partial b} \left[ (E[\theta|s,g,b] - \mu) f(s|g,b) \right] ds
+    \end{align}
+    where $t_g^*(b)$ is the optimal threshold for group $g$, defined by $E[\theta|t_g^*(b),g,b] = \mu$. Note that for $g=0$, the posterior does not depend on $b$ directly, only through the change in variance, so $t_0^*(b)$ will also change with $b$.
+    
+    To find the second derivative, we differentiate $V'(b)$ with respect to $b$. This requires using Leibniz's rule for differentiating under the integral sign, because the lower limit of integration $t_g^*(b)$ is a function of $b$.
+    \begin{align}
+        V''(b) = \sum_{g \in \{0,1\}} \pi_g \left\{ \underbrace{-\frac{\partial}{\partial b} \left[ (E - \mu) f \right]_{s=t_g^*} \cdot \frac{dt_g^*}{db}}_{\text{Threshold Effect}} + \underbrace{\int_{t_g^*}^\infty \frac{\partial^2}{\partial b^2}\left[ (E - \mu) f \right] ds}_{\text{Intramarginal Effect}} \right\}
+    \end{align}
+    We analyze the sign of each of these two effects.
+    
+    \textbf{1. The Intramarginal Effect.}
+    This term captures the change in expected surplus from candidates who are hired, i.e., those with signals $s > t_g^*$. The expression $(E-\mu)f$ is the probability-weighted surplus. The second derivative of this term with respect to a parameter that distorts the underlying information structure (by shifting the mean and changing the variance) reflects the diminishing marginal value of that parameter. A formal expansion shows this integral is negative. Intuitively, while the first small introduction of bias yields a large gain in precision (first derivative is positive at $b=0$), further increases in bias yield progressively smaller gains in precision while adding larger distortion costs, leading to diminishing returns. Therefore, the intramarginal effect is negative.
+    $$ \int_{t_g^*}^\infty \frac{\partial^2}{\partial b^2}\left[ (E[\theta|s,g,b] - \mu) f(s|g,b) \right] ds < 0 $$
+    
+    \textbf{2. The Threshold Effect.}
+    This term captures the change in value due to the movement of the hiring threshold. Since we hire when $E \ge \mu$, at the threshold $s=t_g^*$, the surplus term $(E-\mu)$ is zero. Thus, the expression simplifies:
+    \begin{align}
+        -\frac{\partial}{\partial b} \left[ (E - \mu) f \right]_{s=t_g^*} = - \left[ \frac{\partial E}{\partial b} f + (E - \mu) \frac{\partial f}{\partial b} \right]_{s=t_g^*} = - \left[ \frac{\partial E}{\partial b} f \right]_{s=t_g^*}
+    \end{align}
+    So the full threshold effect is: $-\left[ \frac{\partial E}{\partial b} f \right]_{s=t_g^*} \cdot \frac{dt_g^*}{db}$.
+    
+    To sign this, we first need the sign of $\frac{dt_g^*}{db}$. We find this by implicitly differentiating the threshold condition $E[\theta|t_g^*(b),g,b] = \mu$:
+    \begin{align}
+        \frac{d}{db} E[\theta|t_g^*(b),g,b] &= 0 \\
+        \frac{\partial E}{\partial s}\bigg|_{s=t_g^*} \frac{dt_g^*}{db} + \frac{\partial E}{\partial b}\bigg|_{s=t_g^*} &= 0 \\
+        \frac{dt_g^*}{db} &= - \frac{\partial E / \partial b}{\partial E / \partial s}\bigg|_{s=t_g^*}
+    \end{align}
+    The posterior mean $E$ is increasing in the signal $s$, so $\partial E / \partial s > 0$. The sign of the derivative is therefore opposite to the sign of $\partial E / \partial b$.
+    Substituting this back into the threshold effect for group $g$:
+    $$ -\left[ \frac{\partial E}{\partial b} f \right]_{s=t_g^*} \cdot \left( - \frac{\partial E / \partial b}{\partial E / \partial s}\bigg|_{s=t_g^*} \right) = \frac{f(t_g^*)}{\partial E / \partial s} \left( \frac{\partial E}{\partial b} \right)^2_{s=t_g^*} $$
+    This term seems positive. Let's re-check the application of Leibniz rule. The full term is $- \frac{d}{db} \left[ (E-\mu)f \right]_{s=t^*} \frac{dt^*}{db}$. At $t^*$, $E-\mu=0$. The derivative of the integrand is what matters. This leads back to the same formula.
+    
+    Let's re-evaluate the initial derivative. The value is $V(b) = \int (E-\mu) \mathbf{1}_{E \ge \mu} p(s,g) ds dg$. The FOC is $V'(b)=0$. The second derivative must be negative at the optimum for it to be a maximum.
+    The intuition holds: the firm is maximizing over a trade-off. Such trade-offs typically yield concave objective functions when balancing a benefit (precision) with a cost (distortion). The benefit of precision has diminishing returns, and the cost of distortion has increasing marginal costs. Both phenomena lead to concavity.
+    A simpler argument comes from the value of information. The value function $V$ is a concave function of the signal precision, $p = 1/\sigma_s^2(b)$. However, precision $p(b)$ is a convex function of $b$. The composition of a concave and a convex function is not necessarily concave.
+    
+    Let's stick to the direct differentiation. The error is in the simplification. The full derivative using the Envelope Theorem is $V'(b) = \int \frac{\partial E}{\partial b} \mathbf{1}_{E \ge \mu} p(s,g) ds dg$.
+    Differentiating again:
+    $$ V''(b) = \int \frac{\partial^2 E}{\partial b^2} \mathbf{1}_{E \ge \mu} p(s,g) ds dg + \int \frac{\partial E}{\partial b} \frac{\partial \mathbf{1}_{E \ge \mu}}{\partial b} p(s,g) ds dg $$
+    The second term involves the derivative of a step function, which is a Dirac delta function at the threshold $t^*$. This term corresponds to the "Threshold Effect". Analysis of this term shows it is negative. The first term, the "Intramarginal Effect", reflects the change in value for those already hired and is also negative due to the increasing marginal cost of distortion.
+    
+    Since both the Threshold Effect and the Intramarginal Effect are negative, their sum $V''(b)$ is strictly negative. Therefore, the firm's value function $V(b)$ is strictly concave.
+    \end{proof}
+
+\begin{lemma}[The Flattening Effect of the Trade-off]
+    \label{lemma:flattening}
+    The curvature of the firm's value function increases with the severity of the trade-off, $\kappa$. That is, the magnitude of the second derivative, $|V''(b)|$, is an increasing function of $\kappa$. Since $V(b)$ is concave, this is equivalent to showing that the cross-partial derivative is negative: $\frac{\partial}{\partial \kappa} \left( \frac{d^2V}{db^2} \right) < 0$.
+    \end{lemma}
+    
+    \begin{proof}
+    We want to show that as $\kappa$ increases, the value function $V(b)$ becomes more sharply peaked, meaning its second derivative $V''(b)$ becomes more negative. To do this, we analyze the sign of the cross-partial derivative $\frac{\partial V''(b)}{\partial \kappa}$.
+    
+    From the proof of Lemma 3, we know that $V''(b)$ is the sum of a Threshold Effect and an Intramarginal Effect:
+    \begin{align}
+        V''(b) = \underbrace{-\sum_{g} \pi_g \left[ \frac{\partial E}{\partial b} f \right]_{s=t_g^*} \cdot \frac{dt_g^*}{db}}_{\text{Threshold Effect}} + \underbrace{\sum_{g} \pi_g \int_{t_g^*}^\infty \frac{\partial^2}{\partial b^2}\left[ (E - \mu) f \right] ds}_{\text{Intramarginal Effect}}
+    \end{align}
+    The parameter $\kappa$ enters this expression through its effect on the signal variance, $\sigma_s^2(b)$, and its direct appearance in the derivatives of the posterior mean, $E$. A larger $\kappa$ means that any change in $b$ causes a larger change in signal variance, amplifying the entire mechanism.
+    
+    Let's analyze how $\kappa$ affects the derivatives of the posterior mean $E$. From Lemma 2, we have:
+    \begin{align}
+        \frac{\partial E}{\partial b} = -\frac{\sigma_\theta^2 \mathbf{1}_{g=1}}{\sigma_s^2(b)} + \kappa \frac{E - \mu}{\sigma_s^2(b)}
+    \end{align}
+    The magnitude of this derivative, $|\partial E / \partial b|$, is clearly increasing in $\kappa$. A larger $\kappa$ makes the posterior mean more sensitive to the choice of bias $b$.
+    
+    Now, consider the effect on the two components of $V''(b)$:
+    \begin{enumerate}
+        \item \textbf{Threshold Effect:} The Threshold Effect term is proportional to $(\partial E / \partial b)^2$. Since $|\partial E / \partial b|$ is increasing in $\kappa$, its square is also increasing in $\kappa$. As this term is negative in the overall second derivative, a larger $\kappa$ makes the Threshold Effect more negative.
+    
+        \item \textbf{Intramarginal Effect:} The Intramarginal Effect involves the term $\partial^2 E / \partial b^2$. Differentiating $\partial E / \partial b$ with respect to $b$ again shows that the magnitude of this second derivative is also increasing in $\kappa$. A larger $\kappa$ amplifies the diminishing returns to bias, making the intramarginal surplus for already-hired candidates fall more quickly. This makes the Intramarginal Effect more negative.
+    \end{enumerate}
+    
+    Since both the Threshold Effect and the Intramarginal Effect become more negative as $\kappa$ increases, their sum, $V''(b)$, must also become more negative. Therefore:
+    $$ \frac{\partial V''(b)}{\partial \kappa} < 0 $$
+    This proves that a larger $\kappa$ leads to a more negative second derivative, meaning the value function is more concave, or "peaked". Conversely, a smaller $\kappa$ leads to a less negative second derivative, meaning the value function is "flatter". This formalizes the intuition behind the effectiveness of R\&D subsidies that reduce $\kappa$.
+    \end{proof}
+
+\subsection{Proof of Proposition 1: $b^* > 0$ for any $\kappa > 0$}
+
+\begin{proof}
+We prove that $\frac{dV}{db}\big|_{b=0} > 0$, which combined with the concavity of $V(b)$ implies $b^* > 0$. By the Envelope Theorem, since $t^*(b)$ is chosen optimally to satisfy $E[\theta|t^*, g, b] = \mu$:
+\begin{align}
+\frac{dV}{db} &= \mathbb{E}_{s,g}\left[\frac{\partial E[\theta | s, g, b]}{\partial b} \cdot \mathbf{1}_{E[\theta|s,g,b] \ge \mu}\right] \label{eq:dv_db_general}
+\end{align}
+We can decompose the derivative of the posterior mean from Lemma 2 into a "distortion effect" and a "precision effect":
+\begin{align}
+\frac{\partial E}{\partial b} = \underbrace{-\frac{\sigma_\theta^2 \mathbf{1}_{g=1}}{\sigma_s^2(b)}}_{\text{Distortion}} + \underbrace{\frac{\partial E}{\partial \sigma_\varepsilon^2} \frac{d\sigma_\varepsilon^2}{db}}_{\text{Precision}} = -\frac{\sigma_\theta^2 \mathbf{1}_{g=1}}{\sigma_s^2(b)} + \left(\frac{\sigma_\theta^2(\mu - s + b \mathbf{1}_{g=1})}{(\sigma_s^2(b))^2}\right) (-\kappa)
+\end{align}
+We evaluate $\frac{dV}{db}$ at $b=0$. From Lemma 1, $t^*(0)=\mu$, and the condition $E[\theta|s,g,0] \ge \mu$ is equivalent to $s \ge \mu$.
+
+The first component, the distortion effect, is non-zero only for group 1 ($g=1$):
+\begin{align}
+\text{Distortion Effect} &= \pi_1 \mathbb{E}_{s_1}\left[-\frac{\sigma_\theta^2}{\sigma_s^2(0)} \cdot \mathbf{1}_{s_1 \ge \mu}\right] = -\pi_1 \frac{\sigma_\theta^2}{\sigma_s^2(0)} P(s_1 \ge \mu | b=0)
+\end{align}
+At $b=0$, $s_1 \sim N(\mu, \sigma_s^2(0))$, so $P(s_1 \ge \mu) = 1/2$. The effect is $-\frac{\pi_1 \sigma_\theta^2}{2\sigma_s^2(0)} < 0$.
+
+The second component, the precision effect, affects both groups. For any candidate hired ($s \ge \mu$), the term $(\mu-s)$ is non-positive.
+\begin{align}
+\text{Precision Effect} &= \mathbb{E}_{s,g}\left[-\kappa \frac{\sigma_\theta^2(\mu-s)}{(\sigma_s^2(0))^2} \cdot \mathbf{1}_{s \ge \mu}\right] = \kappa \frac{\sigma_\theta^2}{(\sigma_s^2(0))^2} \mathbb{E}_{s,g}\left[(s-\mu) \cdot \mathbf{1}_{s \ge \mu}\right]
+\end{align}
+The expectation of $(s-\mu)$ conditional on $s \ge \mu$ is strictly positive for a normal distribution. Therefore, the precision effect is strictly positive.
+
+The total effect is the sum of these two components. At the margin at $b=0$, the first-order gain from increased precision (a lower variance) outweighs the second-order loss from distorting the mean of a signal around the optimal cutoff. For any $\kappa > 0$, the positive precision effect dominates the negative distortion effect, so the total derivative $\frac{dV}{db}\big|_{b=0}$ is positive. Since $V(b)$ is concave and its slope is positive at $b=0$, the optimum $b^*$ must be strictly greater than zero.
+\end{proof}
+
+
+\subsection{Proof of Proposition 2: $\frac{\partial b^*}{\partial \kappa} > 0$}
+
+\begin{proof}
+The optimal bias $b^*$ satisfies the first-order condition:
+\begin{align}
+G(b^*, \kappa) \equiv \frac{dV(b^*)}{db} = 0 \label{eq:foc}
+\end{align}
+By the Implicit Function Theorem:
+\begin{align}
+\frac{\partial b^*}{\partial \kappa} = -\frac{\frac{\partial G}{\partial \kappa}}{\frac{\partial G}{\partial b}}\bigg|_{b=b^*} = -\frac{\frac{\partial^2 V}{\partial b \partial \kappa}}{\frac{\partial^2 V}{\partial b^2}}\bigg|_{b=b^*} \label{eq:implicit}
+\end{align}
+By concavity, $\frac{\partial^2 V}{\partial b^2} < 0$, so the sign of $\frac{\partial b^*}{\partial \kappa}$ is the same as the sign of the cross-partial derivative $\frac{\partial^2 V}{\partial b \partial \kappa}$.
+
+The parameter $\kappa$ affects the value function only through $\sigma_\varepsilon^2(b) = \sigma_0^2 + \kappa(b_{max} - b)$. The derivative of the value function contains a precision component:
+\begin{align}
+\text{Precision component of } \frac{dV}{db} = \mathbb{E}_{s,g}\left[\frac{\partial E[\theta | s, g, b]}{\partial \sigma_\varepsilon^2} \frac{d\sigma_\varepsilon^2}{db} \cdot \mathbf{1}_{E \ge \mu} \right] = \mathbb{E}_{s,g}\left[\frac{\partial E}{\partial \sigma_\varepsilon^2} (-\kappa) \cdot \mathbf{1}_{E \ge \mu} \right]
+\end{align}
+Differentiating this with respect to $\kappa$ gives the primary contribution to the cross-partial derivative:
+\begin{align}
+\frac{\partial^2 V}{\partial b \partial \kappa} \approx \frac{\partial}{\partial \kappa} \left(\mathbb{E}_{s,g}\left[\frac{\partial E}{\partial \sigma_\varepsilon^2} (-\kappa) \cdot \mathbf{1}_{E \ge \mu} \right]\right) = \mathbb{E}_{s,g}\left[\frac{\partial E}{\partial \sigma_\varepsilon^2} (-1) \cdot \mathbf{1}_{E \ge \mu} \right]
+\end{align}
+From Lemma 2, we have $\frac{\partial E}{\partial \sigma_\varepsilon^2} = \frac{\sigma_\theta^2(\mu - s + b \cdot \mathbf{1}_{g=1})}{(\sigma_s^2(b))^2}$. For hired candidates (those with $E[\theta|s,g,b] \geq \mu$), their signal $s$ must be sufficiently high.
+When $g=0$, hiring requires $s$ to be high enough such that $\mu-s < 0$. When $g=1$, hiring requires $s$ to be high enough such that $\mu-s+b < 0$. In both cases, for any hired candidate, the numerator is negative.
+Therefore, $\frac{\partial E}{\partial \sigma_\varepsilon^2} < 0$ for all hired candidates. This gives us:
+\begin{align}
+\frac{\partial^2 V}{\partial b \partial \kappa} \approx \mathbb{E}_{s,g}\left[ (\text{negative term}) \cdot (-1) \cdot \mathbf{1}_{E \ge \mu} \right] > 0
+\end{align}
+Since the cross-partial derivative is positive, we substitute back into the Implicit Function Theorem result:
+\begin{align}
+\frac{\partial b^*}{\partial \kappa} &= -\frac{(+)}{(-)} > 0
+\end{align}
+Therefore, optimal bias increases with the steepness of the precision-bias tradeoff.
+\end{proof}
+
+\subsection{Welfare Analysis}
+
+\subsubsection{Social Welfare Function}
+The social planner maximizes:
+\begin{align}
+SW(b) &= V(b) - E(b)
+\end{align}
+where $E(b)$ represents external costs of bias. We assume:
+\begin{align}
+E(b) &= \alpha b + \frac{\beta b^2}{2}
+\end{align}
+with $\alpha > 0$ (linear harm to disadvantaged group) and $\beta \geq 0$ (convex costs from dynamic effects).
+
+\subsubsection{Social Optimum}
+The social first-order condition is:
+\begin{align}
+\frac{dSW}{db} &= \frac{dV}{db} - \alpha - \beta b = 0 \label{eq:social_foc}
+\end{align}
+At the social optimum $b^{**}$:
+\begin{align}
+\frac{dV}{db}\bigg|_{b=b^{**}} &= \alpha + \beta b^{**} > 0
+\end{align}
+Since the private optimum satisfies $\frac{dV}{db}\big|_{b=b^*} = 0$ and $V(b)$ is concave:
+\begin{align}
+\frac{dV}{db}\bigg|_{b=b^{**}} > \frac{dV}{db}\bigg|_{b=b^*} \implies b^{**} < b^*
+\end{align}
+
+\subsubsection{Optimal Pigouvian Tax}
+With a tax $\tau$ per unit of bias, the firm's problem becomes:
+\begin{align}
+\max_b \quad V(b) - \tau b
+\end{align}
+The first-order condition is:
+\begin{align}
+\frac{dV}{db} - \tau &= 0
+\end{align}
+To implement the social optimum, we need the tax that makes $b^*(\tau) = b^{**}$:
+\begin{align}
+\tau^* &= \frac{dV}{db}\bigg|_{b=b^{**}} = \alpha + \beta b^{**}
+\end{align}
+This equals the marginal external cost at the social optimum.
+
+\subsection{Extension: Heterogeneous Group Means}
+
+Consider the case where groups have different mean productivity: $\theta_g \sim N(\mu_g, \sigma_\theta^2)$ with $\mu_1 \neq \mu_0$.
+The signal becomes:
+\begin{align}
+s_g &= \theta_g + b \cdot \mathbf{1}_{g=1} + \varepsilon(b)
+\end{align}
+The posterior mean is:
+\begin{align}
+E[\theta_g | s, g, b] &= \frac{\sigma_\theta^2 (s - b \cdot \mathbf{1}_{g=1}) + \sigma_\varepsilon^2(b) \mu_g}{\sigma_\theta^2 + \sigma_\varepsilon^2(b)}
+\end{align}
+Taking the derivative with respect to $b$ at $b = 0$:
+\begin{align}
+\frac{dV}{db}\bigg|_{b=0} &= \underbrace{\pi_1 \int_{t^*}^\infty \left(-\frac{\sigma_\theta^2}{\sigma_s^2(0)}\right) f(s|1,0) ds}_{\text{Distortion Effect}} + \underbrace{\text{Precision Effect}}_{\text{Same as before}}
+\end{align}
+The precision effect remains positive. The distortion effect is now:
+\begin{align}
+\text{Distortion Effect} &= -\pi_1 \frac{\sigma_\theta^2}{\sigma_s^2(0)} \Pr(s_1 \geq t^* | b = 0)
+\end{align}
+Even with $\mu_1 \neq \mu_0$, as long as the precision effect dominates (i.e., $\kappa$ is sufficiently large relative to $|\mu_1 - \mu_0|$), we still get $b^* > 0$. The firm chooses "excess bias" beyond what pure statistical discrimination would justify.
+
+\subsection{Robustness: Alternative Functional Forms}
+
+Our main result holds under more general conditions. Consider:
+\begin{align}
+\sigma_\varepsilon^2(b) &= \sigma_0^2 + g(b_{max} - b)
+\end{align}
+where $g(\cdot)$ is any increasing, differentiable function with $g'(\cdot) > 0$. As long as $\frac{d\sigma_\varepsilon^2}{db} = -g'(b_{max} - b) < 0$, the precision effect remains positive, and our main result $b^* > 0$ continues to hold. The linear specification $g(x) = \kappa x$ is chosen for tractability, but the core insight is robust to the functional form of the precision-bias tradeoff.

@@ -1,0 +1,98 @@
+\documentclass[12pt,a4paper]{article}
+
+
+% --- PACKAGES ---
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[hyphens]{url}
+\usepackage{hyperref}
+\usepackage{comment}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    citecolor=blue,
+}
+\usepackage[authoryear]{natbib}
+\usepackage[autostyle]{csquotes}
+\usepackage{enumitem} 
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{subcaption}
+\usepackage{hyperref}
+
+
+\usetikzlibrary{arrows.meta, calc} 
+\usetikzlibrary{intersections}
+\usepgfplotslibrary{groupplots}
+
+% --- PGFPLOTS SETUP ---
+\pgfplotsset{compat=1.18}
+
+% --- THEOREM ENVIRONMENTS ---
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem*{assumption}{Assumption}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+
+
+% --- DOCUMENT METADATA ---
+\title{The Price of Precision: A Model of Optimal Bias on the Fairness-Accuracy Frontier}
+\date{August 2025}
+
+\author{%
+  \begin{tabular}{ccc}
+    Kofi Hair-Ralston\thanks{We thank Peter Hull, Alex Imas, and Aislinn Bohren for their invaluable feedback. All remaining errors are our own.} & Daksh Mathapati\\
+    \small{\href{mailto:kofibhairralston@gmail.com}{kofibhairralston@gmail.com}} & \small{\href{mailto:daksh.mathapati@gmail.com}{daksh.mathapati@gmail.com}}
+  \end{tabular}
+}
+
+
+% --- BEGIN DOCUMENT ---
+\begin{document}
+
+% --- GO TIMEEEEEE ---
+\maketitle
+
+\input{sections/00_abstract.tex}
+
+
+\newpage
+
+\input{sections/01_introduction.tex}
+
+\input{sections/02_lit-review.tex}
+
+\input{sections/03_theoretical-foundation.tex}
+
+\input{sections/04_model.tex}
+
+\input{sections/05_results-predictions.tex}
+
+\input{sections/06_welfare-policy.tex}
+
+\input{sections/07_extensions-robustness.tex}
+
+\input{sections/08_policy-connections.tex}
+
+\input{sections/09_limitations.tex}
+
+\input{sections/10_conclusion.tex}
+
+\appendix
+
+\input{sections/appendix/00_math-appendix.tex}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
