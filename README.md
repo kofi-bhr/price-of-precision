@@ -1,6 +1,6 @@
 # The Price of Precision: A Model of Optimal Bias on the Fairness-Accuracy Frontier
 
-This repository contains the LaTeX source for our academic paper. The document explores the trade-offs between fairness and accuracy in decision-making models.
+This repository contains the LaTeX source for two academic papers - a letter and a full paper. The articles both interrogate the trade-offs between fairness and accuracy in decision-making models.
 
 ## Getting Started
 
