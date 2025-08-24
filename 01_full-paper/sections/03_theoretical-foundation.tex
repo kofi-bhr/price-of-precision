@@ -1,0 +1,131 @@
+\section{Conditions for Fairness-Accuracy Trade-offs}
+
+We begin by formalizing the fairness-accuracy trade-off as a constrained optimization problem. This approach is standard in the algorithmic fairness literature and allows us to precisely define the conditions under which a trade-off must exist. As established by foundational work in the field (e.g., \citealp{Kleinberg2017, Chouldechova2017}), inherent mathematical constraints often make it impossible to simultaneously satisfy multiple desirable properties, necessitating a trade-off.
+
+\subsection{The Unconstrained Learning Problem}
+
+Let us consider a standard supervised learning setting. We have a feature space $\mathcal{X}$, a protected group attribute $G \in \{g_0, g_1\}$, and a binary outcome variable $Y \in \{0, 1\}$. A firm or decision-maker wishes to learn a predictive model, or hypothesis, $h$ from a hypothesis space $\mathcal{H}$. The goal of the standard, unconstrained learning problem is to find the hypothesis $h_{acc} \in \mathcal{H}$ that minimizes some expected loss function, $L(h(X), Y)$. This is often referred to as Empirical Risk Minimization (ERM).
+
+\begin{equation}
+h_{acc} = \arg\min_{h \in \mathcal{H}} \mathbb{E}[L(h(X), Y)]
+\end{equation}
+
+This hypothesis, $h_{acc}$, represents the most accurate possible model within the given hypothesis space, without any consideration for fairness. The loss it achieves, $L_{acc} = \mathbb{E}[L(h_{acc}(X), Y)]$, serves as the benchmark for maximum accuracy.
+
+\subsection{Fairness as a Constraint on the Hypothesis Space}
+
+We introduce fairness by defining a set of constraints on the behavior of the hypothesis. A fairness metric, such as demographic parity, equalized odds, or calibration, imposes a restriction on the set of acceptable models. We can formalize this by defining a \textit{fair hypothesis space}, $\mathcal{H}_F$, as the subset of hypotheses in $\mathcal{H}$ that satisfy the chosen fairness criterion.
+
+\begin{definition}[Fair Hypothesis Space]
+A hypothesis $h$ is considered fair if it satisfies a given fairness constraint, $C(h) \leq \epsilon$ for some tolerance $\epsilon \geq 0$. The set of all such fair hypotheses is:
+\begin{equation}
+\mathcal{H}_F = \{h \in \mathcal{H} \mid C(h) \leq \epsilon \}
+\end{equation}
+\end{definition}
+
+The fairness-constrained learning problem is then to find the best possible hypothesis, $h_{\text{fair}}$, within this restricted set:
+
+\begin{equation}
+h_{\text{fair}} = \arg\min_{h \in \mathcal{H}_F} \mathbb{E}[L(h(X), Y)]
+\end{equation}
+
+\subsection{The Existence of a Trade-Off}
+
+A fairness-accuracy trade-off exists if and only if the solution to the constrained problem is strictly worse than the solution to the unconstrained problem. We can define the magnitude of this trade-off, which corresponds to the parameter $\kappa$ in our main model, as follows:
+
+\begin{definition}[Fairness-Accuracy Trade-off]
+The fairness-accuracy trade-off, $\kappa_{\text{tradeoff}}$, is the difference in loss between the fairness-constrained optimal hypothesis and the accuracy-optimal hypothesis:
+\begin{equation}
+\kappa_{\text{tradeoff}} = L(h_{\text{fair}}) - L(h_{acc})
+\end{equation}
+\end{definition}
+
+A trade-off exists (i.e., $\kappa_{\text{tradeoff}} > 0$) if and only if the most accurate hypothesis, $h_{acc}$, is not itself fair. That is, if $h_{acc} \notin \mathcal{H}_F$. The subsequent propositions in this section will establish the precise conditions under which this exclusion occurs.
+
+\subsection{Conditions for an Inherent Trade-off}
+
+The fundamental reason for a trade-off arises when the protected attribute $G$ is statistically informative about the outcome $Y$, even after accounting for the other features $X$. To formalize this, let's consider the theoretically most accurate possible classifier, the Bayes Optimal Classifier.
+
+\begin{definition}[Bayes Optimal Classifier]
+The Bayes Optimal Classifier, $h_{bayes}(x, g)$, predicts the outcome that is most probable given the features and group membership. For a binary outcome, it is defined as:
+\begin{equation}
+h_{bayes}(x, g) = 
+\begin{cases} 
+1 & \text{if } \mathbb{P}(Y=1 | X=x, G=g) \geq 0.5 \\
+0 & \text{otherwise}
+\end{cases}
+\end{equation}
+This classifier achieves the lowest possible error rate, known as the Bayes error rate.
+\end{definition}
+
+Now, let's consider a common fairness constraint: demographic parity. Demographic parity requires that the probability of a positive prediction is the same for all groups. 
+
+\begin{definition}[Demographic Parity]
+A hypothesis $h$ satisfies demographic parity if its predictions are statistically independent of the group attribute $G$. That is:
+\begin{equation}
+    \mathbb{P}(h(X,G)=1 | G=g_0) = \mathbb{P}(h(X,G)=1 | G=g_1)
+\end{equation}
+\end{definition}
+
+We can now state the condition for a necessary trade-off.
+
+\begin{proposition}
+If the true conditional probability of the outcome differs across groups (i.e., $\mathbb{P}(Y=1 | G=g_0) \neq \mathbb{P}(Y=1 | G=g_1)$), and the Bayes Optimal Classifier is the only hypothesis that achieves the minimum Bayes error, then any classifier that satisfies demographic parity must have an error rate strictly greater than the Bayes error rate.
+\end{proposition}
+
+\begin{proof}[Proof Sketch]
+Let $h_{acc}$ be the accuracy-optimal hypothesis, which we assume is the Bayes Optimal Classifier, $h_{bayes}$. By definition, $h_{bayes}$ uses group membership $g$ in its calculation whenever $\mathbb{P}(Y=1 | X=x, G=g)$ is dependent on $g$.
+
+If the base rates differ between groups (i.e., $\mathbb{P}(Y=1|G=g_0) \neq \mathbb{P}(Y=1|G=g_1)$), then for $h_{bayes}$ to satisfy demographic parity, it would require the unlikely coincidence that integrating over all features $X$ exactly equalizes the prediction rates. 
+
+More formally, the prediction rate for group $g$ under $h_{bayes}$ is $\int_x \mathbb{P}(h_{bayes}(x,g)=1 | X=x, G=g) p(x|g) dx$. Demographic parity would require this quantity to be equal for $g_0$ and $g_1$. However, the Bayes classifier is optimal precisely because it tracks the true conditional probabilities $\mathbb{P}(Y=1|X,G)$. If these probabilities have different distributions across groups, the resulting prediction rates from an optimal classifier will also differ.
+
+Therefore, if base rates are unequal, the Bayes Optimal Classifier $h_{bayes}$ will not satisfy demographic parity. Any other hypothesis $h_{\text{fair}}$ that does satisfy demographic parity must, by definition, differ from $h_{bayes}$ and will therefore have a strictly higher error rate. This means $h_{acc} \notin \mathcal{H}_F$, which proves that the trade-off $\kappa_{\text{tradeoff}}$ is strictly greater than zero.
+\end{proof}
+
+\subsection{Trade-offs with Error Rate Equality}
+
+The trade-off is not unique to demographic parity. A similar conflict arises with another common fairness criterion, Equalized Odds, which focuses on error rates.
+
+\begin{definition}[Equalized Odds]
+A hypothesis $h$ satisfies Equalized Odds if its True Positive Rate (TPR) and False Positive Rate (FPR) are equal across all groups. That is:
+\begin{align}
+\mathbb{P}(h(X,G)=1 | Y=0, G=g_0) &= \mathbb{P}(h(X,G)=1 | Y=0, G=g_1) \quad \text{(Equal FPR)}
+\end{align}
+\end{definition}
+
+As shown by \citet{Kleinberg2017} and \citet{Chouldechova2017}, this criterion often conflicts with another desirable property of a predictor: calibration.
+
+\begin{definition}[Calibration]
+A hypothesis $h$ is calibrated if its prediction can be interpreted as a true probability. That is, for any prediction score $s$ that $h$ outputs:
+\begin{equation}
+\mathbb{P}(Y=1 | h(X,G)=s) = s
+\end{equation}
+\end{definition}
+
+The Bayes Optimal Classifier is, by its nature, perfectly calibrated. The following proposition, summarizing a key result from the literature, shows that this property is incompatible with Equalized Odds under most real-world conditions.
+
+\begin{proposition}
+If the base rates of the positive outcome differ across groups (i.e., $\mathbb{P}(Y=1 | G=g_0) \neq \mathbb{P}(Y=1 | G=g_1)$), a non-trivial classifier cannot simultaneously satisfy both Calibration and Equalized Odds.
+\end{proposition}
+
+\begin{proof}[Proof Sketch]
+The proof, formally established in \citet{Kleinberg2017}, shows that if a classifier satisfies both calibration and equalized odds, the base rates for each group must be equal. Since the Bayes Optimal Classifier ($h_{acc}$) is perfectly calibrated, if the base rates in the data are unequal, it cannot satisfy Equalized Odds. Therefore, any classifier $h_{\text{fair}}$ that is constrained to satisfy Equalized Odds must deviate from the Bayes Optimal Classifier and will thus have a higher error rate. This again establishes that $h_{acc} \notin \mathcal{H}_F$ (where $\mathcal{H}_F$ is the set of models satisfying Equalized Odds), proving that $\kappa_{\text{tradeoff}} > 0$.
+\end{proof}
+
+\subsection{The Magnitude of the Trade-off: The Fairness Frontier}
+
+The existence of a trade-off is a binary question, but its magnitude is a continuous one. The severity of the trade-off—how much accuracy must be sacrificed for a given gain in fairness—is not a universal constant. It depends critically on the statistical properties of the data. The concept of the ``fairness frontier,'' introduced by \citet{Liang2025}, provides a clear framework for understanding this dependency.
+
+Imagine a space where the axes represent the error rates for each group, $e_{g_0}$ and $e_{g_1}$. An ideal algorithm would have zero error for both groups (the origin). Any given algorithm corresponds to a point in this space.
+
+\begin{definition}[The Fairness Frontier]
+The fairness frontier is the set of non-dominated algorithms. An algorithm is on the frontier if no other algorithm exists that is better for one group without being worse for the other. The point of perfect fairness is where $e_{g_0} = e_{g_1}$.
+\end{definition}
+
+The shape of this frontier, and its relationship to the point of perfect fairness, is determined by the data's structure:
+\\ \\ \textbf{Group-Balanced Data.} If the features $X$ are similarly predictive for all groups, the frontier is relatively symmetric. In this case, the fairest algorithm (where error rates are equal) may also be an efficient one (lying on the frontier). Here, the trade-off is minimal or non-existent. A small move away from perfect fairness yields little to no gain in overall accuracy.
+\\ \\ \textbf{Group-Skewed Data} If the features are much more predictive for one group than another, the frontier will be skewed. The point of perfect fairness will lie strictly inside the frontier, meaning it is inefficient. To improve the error rate for one group, one must accept a much larger increase in the error rate for the other. This creates a steep and necessary trade-off.
+\\ \\
+This provides a direct micro-foundation for the parameter $\kappa$ in our main model. A large $\kappa$ corresponds to a group-skewed data environment with a steep frontier, where the marginal gain in accuracy from accepting some unfairness is large. A small $\kappa$ corresponds to a group-balanced environment where this marginal gain is small. Therefore, the magnitude of the fairness-accuracy trade-off is a direct consequence of the statistical properties of the data available to the decision-maker.
+

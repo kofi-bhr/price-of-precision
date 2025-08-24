@@ -1,0 +1,67 @@
+\section{The Model}
+
+\subsection{Primitives and Assumptions}
+A risk-neutral firm hires candidates. Candidate productivity $\theta$ draws from a Normal distribution, $\theta \sim N(\mu, \sigma_\theta^2)$. Candidates belong to group $g \in \{0, 1\}$.
+
+\begin{assumption}[A1]
+\textbf{Identical True Productivity, Differential Measurement.} To isolate the informational mechanism, our baseline model assumes that the distribution of true underlying productivity, $\theta$, is identical across groups: $\mathbb{E}[\theta|g=1] = \mathbb{E}[\theta|g=0] = \mu$. However, the firm does not observe $\theta$ directly. Instead, it observes a signal $s$ that measures productivity with group-specific error. This creates a scenario where group membership is informative not about true ability, but about the nature of the measurement error. This case is policy-relevant in contexts where, for historical or structural reasons, data for one group is less reliable or more noisy than for another. In Appendix C, we show that our core result ($b^*>0$) is robust to the introduction of moderate differences in group means.
+\end{assumption}
+
+\begin{assumption}[A2]
+\textbf{Observable Group Membership.} The firm observes group membership $g$. While this may cause legal troubles in practice, it helps to isolate the informational mechanism. Our results extend to cases where group membership is imperfectly inferred from observable proxies.
+\end{assumption}
+
+\begin{assumption}[A3]
+\textbf{Signal and Measurement Error Structure.} The firm observes a signal $s_g$ for a candidate from group $g$. The signal is a function of true productivity $\theta$, a group-specific measurement error $\eta_g$, and the firm's choice of bias $b$. We model the signal as $s_g = \theta + \eta_g + b \cdot g + \varepsilon(b)$. The term $\eta_g \sim N(0, \sigma_{\eta,g}^2)$ represents exogenous, group-specific noise. The firm's choice of $b$ can be interpreted as an adjustment to counteract suspected measurement error, which in turn affects the variance of the overall signal noise, $\varepsilon(b)$.
+\end{assumption}
+
+\begin{longtable}{@{}ll@{}}
+\caption{Model Parameters and Notation}
+\label{tab:params}\\
+\toprule
+\textbf{Parameter} & \textbf{Description} \\ \midrule
+\endfirsthead
+\toprule
+\textbf{Parameter} & \textbf{Description} \\ \midrule
+\endhead
+\bottomrule
+\endfoot
+$\theta$ & True candidate productivity, $\theta \sim N(\mu, \sigma_\theta^2)$ \\
+$s_g$ & Algorithmic signal of productivity for group $g$ \\
+$g \in \{0,1\}$ & Candidate group membership (observed) \\
+$\pi_g$ & Proportion of group $g$ in the population, with $\pi_0+\pi_1=1$ \\
+$b$ & Firm's choice of bias level, $b \in [0, b_{max}]$ \\
+$t$ & Hiring threshold chosen by the firm \\
+$\sigma_\varepsilon^2(b)$ & Variance of the algorithm's signal noise, a function of bias \\
+$\eta_g$ & Exogenous group-specific measurement error, $\eta_g \sim N(0, \sigma_{\eta,g}^2)$ \\
+$\sigma_0^2$ & Baseline signal noise when $b=b_{max}$ \\
+$\kappa$ & Technological coupling parameter ($\kappa>0$) \\
+$V(b)$ & The firm's value function, maximized at $b^*$ \\
+$SWF(b)$ & Social welfare function \\
+$E(b)$ & External costs of bias \\
+\end{longtable}
+
+
+\subsection{The Precision-Bias Trade-off}
+The model's central mechanism is a trade-off between signal precision and bias. This trade-off is at its core a consequence of how fairness constraints are implemented in machine learning systems. As established in the statistical learning literature, imposing a fairness constraint acts as a regularizer, often increasing estimator variance \citep{Kamishima2012, Wick2019}. This causes a dilemma: algorithms can be made fairer, but only at the cost of reduced accuracy.
+
+This intuition is straightforward for economists familiar with constrained optimization. Fairness interventions in machine learning generally work through one of two channels. First, they can constrain the model to ignore certain correlations or features that are predictive but correlated with group membership, thus reducing the model's overall information set and subsequent precision. Second, they may involve post-processing outputs to equalize outcomes across groups, which is equivalent to intentionally adding noise or ``garbling" the signal in the spirit of Bayesian persuasion. In either case, enforcing fairness places a quantitative constraint on the optimization problem, moving the solution away from the unconstrained, accuracy-maximizing estimator and increasing resulting prediction error.
+
+This relationship has been documented empirically across a range of machine learning applications. Studies in hiring algorithms, credit scoring, criminal justice risk assessment, and medical diagnosis consistently show that fairness constraints reduce predictive performance \citep{Kleinberg2017, Chouldechova2017}. The magnitude of this trade-off can vary by domain and algorithm type, but its existence is consistent across contexts.
+
+We formalize this relationship with a functional form motivated by a linear approximation of this constraint (see Appendix B for the micro-foundation).
+
+\begin{definition}[Precision-Bias Trade-off]
+The variance of the signal noise is given by:
+\begin{equation}
+\sigma_\varepsilon^2(b) = \sigma_0^2 + \kappa(b_{max} - b) \quad \text{for } b \in [0, b_{max}]
+\end{equation}
+\end{definition}
+
+Here, $b=b_{max}$ describes the most precise but most biased signal, while $b=0$ represents a ``fair" signal with the highest noise. The parameter $\kappa > 0$ describes the steepness of this trade-off, where higher values of $\kappa$ tell that fairness comes at a greater cost to accuracy.\footnote{We use a linear form for tractability, but our central result (that the firm chooses a positive level of bias) only requires that the trade-off function $\sigma_\varepsilon^2(b)$ is downward sloping (i.e., $d\sigma_\varepsilon^2/db < 0$). Insofar as there is any marginal gain in precision from accepting a small amount of bias, a profit-maximizing firm will move away from the zero-bias point. The linear specification lets us derive closed-form solutions and conduct transparent comparative statics, but the core insight holds under any monotonic relationship.}
+
+\subsection{Firm's Problem}
+The firm chooses bias $b$ and threshold $t$ to maximize the expected productivity of its hired workforce. This objective is standard in contexts with fixed hiring quotas or where talent maximization is the primary goal, and wages are fixed or separable.
+\begin{equation}
+\max_{b, t} \ \mathbb{E}[U(b,t)] = \sum_{g \in \{0,1\}} \pi_g \int_t^\infty \mathbb{E}[\theta | s, g, b] f(s|g, b) ds
+\end{equation}
