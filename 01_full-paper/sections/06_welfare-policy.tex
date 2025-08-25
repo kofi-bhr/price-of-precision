@@ -1,55 +1,26 @@
 \section{Welfare and Policy}
 
 \subsection{Welfare Framework}
-The firm's choice $b^*$ is privately optimal but socially inefficient. A social planner's objective function, $SWF(b) = V(b) - E(b)$, must include the external costs $E(b)$ of bias. These costs are manifold:
-These costs are manifold. First, there are \textbf{Distributional Costs}, as the bias `b` directly harms the disadvantaged group ($g=1$) by lowering their probability of being hired for any given level of productivity $\theta$, creating an equity-efficiency trade-off from the planner's perspective. Second, there are \textbf{Dynamic Costs}, as persistent bias can discourage human capital investment by the disadvantaged group, potentially creating a self-fulfilling prophecy where ex-ante identical groups become ex-post different \citep{Coate1993}, and can also erode social trust and political stability. Finally, there is \textbf{Allocative Inefficiency}, because while the firm optimizes its own hiring decisions, the bias across multiple firms may lead to suboptimal allocation of talent across the economy.
+The firm's choice $b^*$ is privately optimal but socially inefficient. A social planner's objective function, $SWF(b) = V(b) - E(b)$, must include the external costs $E(b)$ of bias. These costs are manifold. First, there are \textbf{Distributional Costs}, as the bias `$b$` directly harms the disadvantaged group ($g=1$) by lowering their probability of being hired for any given level of productivity $\theta$, creating an equity-efficiency trade-off from the planner's perspective. Second, there are \textbf{Dynamic Costs}, as persistent bias can discourage human capital investment by the disadvantaged group, potentially creating a self-fulfilling prophecy where ex-ante identical groups become ex-post different \citep{Coate1993}, and can also erode social trust and political stability. Finally, there is \textbf{Allocative Inefficiency}, because while the firm optimizes its own hiring decisions, the bias across multiple firms may lead to suboptimal allocation of talent across the economy.
 The social optimum $b^{**}$ that maximizes $SWF(b)$ will be strictly less than $b^*$, creating a deadweight loss and justifying policy intervention.
 
 \subsection{Policy Instruments}
 
-Our analysis suggests that prescriptive regulations, such as a simple mandate forcing firms to set bias to zero ($b=0$), are inefficient. Such policies bluntly override the firm's optimization without addressing the underlying technological trade-off, potentially sacrificing significant predictive accuracy for fairness. A more effective approach is to employ incentive-based instruments that reshape the firm's objective function to better align private and social goals.
+Our analysis suggests that prescriptive regulations, such as a simple mandate forcing firms to set bias to zero ($b=0$), are inefficient. Such policies bluntly override the firm's optimization without addressing the underlying technological trade-off, potentially sacrificing significant predictive accuracy for fairness. A more effective approach, visualized in Figure \ref{fig:policy}, is to employ incentive-based instruments that reshape the firm's objective function to better align private and social goals.
 
 \paragraph{R\&D Subsidies to Improve the Technological Frontier.}
-The most efficient intervention is one that targets the root cause of the problem: the severity of the fairness-accuracy trade-off itself. Policies that subsidize research and development, such as R\&D tax credits or grants, can incentivize the creation of new algorithms that lower the technology coupling parameter, $\kappa$. A lower $\kappa$ makes the firm's value function flatter, as formally established in Lemma 4 in the Appendix. This reduction in the curvature of the profit function diminishes the marginal return to bias, directly reducing the optimal choice, $b^*$ (see Figure \ref{fig:policy}). By relaxing the underlying technological constraint, this approach represents a first-best solution, though it may face practical challenges such as the free-rider problem in innovation.
+The most efficient intervention is one that targets the root cause of the problem: the severity of the fairness-accuracy trade-off itself. Policies that subsidize research and development can incentivize the creation of new algorithms that lower the technology coupling parameter, $\kappa$. A lower $\kappa$ makes the firm's value function flatter, as formally established in Lemma 4 in the Appendix. As illustrated by the green curve in Figure \ref{fig:policy}, this reduction in the curvature of the profit function diminishes the marginal return to bias, causing the firm's optimal choice to decrease significantly from the baseline $b^*$.
 
 \paragraph{Pigouvian Taxation to Internalize Externalities.}
-A second approach is to accept the technological frontier as given but force the firm to account for the social costs of its decision. A regulator could impose a Pigouvian tax, $\tau$, for each unit of bias, which alters the firm's problem to $\max_b V(b) - \tau b$. This compels the firm to internalize the negative externality described by the cost function $E(b)$. As derived in Appendix A.5, an optimally chosen tax, $\tau^*$, can induce the firm to select the socially optimal level of bias, $b^{**}$. The primary obstacle to this approach is practical: it requires regulators to accurately measure bias and the marginal social harm it causes, which presents significant monitoring and enforcement challenges.
+A second approach is to accept the technological frontier as given but force the firm to account for the social costs of its decision. A regulator could impose a Pigouvian tax, $\tau$, for each unit of bias, which alters the firm's problem to $\max_b V(b) - \tau b$. This compels the firm to internalize the negative externality described by the cost function $E(b)$. Figure \ref{fig:policy} demonstrates this effect powerfully: the red curve, representing the firm's payoff under taxation, is shifted downward and tilted, moving the optimum dramatically leftward to a level of bias near the social optimum $b^{**}$. As derived in Appendix A.5, an optimally chosen tax, $\tau^*$, can induce the firm to select the socially optimal level of bias.
 
 \paragraph{Transparency Mandates to Leverage Market Forces.}
-Finally, policy can leverage market mechanisms to create endogenous costs for bias. Mandates requiring firms to disclose the fairness properties and trade-offs of their algorithms would not prescribe a specific choice. Instead, they would empower stakeholders (for example, potential employees, customers, or investors) to react to a firm's level of bias. This would effectively endogenize the external cost function $E(b)$ through reputational damage and competitive pressure. The effectiveness of this approach, however, is contingent on the existence of a competitive market and the degree to which market participants are sensitive to fairness concerns.
+Finally, policy can leverage market mechanisms to create endogenous costs for bias. Mandates requiring firms to disclose the fairness properties and trade-offs of their algorithms would not prescribe a specific choice. Instead, they would empower stakeholders (for example, potential employees, customers, or investors) to react to a firm's level of bias. This would effectively endogenize the external cost function $E(b)$ through reputational damage and competitive pressure.
 
 \begin{figure}[H]
-\centering
-	\begin{tikzpicture}
-    \begin{axis}[
-        width=0.7\textwidth,
-        height=0.45\textwidth,
-        title={\textbf{Visualizing Policy Interventions}},
-        xlabel={$b$ (Bias)},
-        ylabel={Value/Payoff},
-        xmin=0, xmax=1, ymin=-0.1, ymax=0.3,
-        axis lines=left,
-        legend pos=south east,
-    ]
-    % Original V(b)
-    \addplot[smooth, thick, domain=0:0.9, color=blue, name path=Vb] {-0.7*x^2 + 0.7*x + 0.05};
-    \addlegendentry{$V(b)$ (Original)}
-    \node[pin=135:{$b^*$}] at (axis cs:0.5, 0.225) {};
-    \draw[dashed] (axis cs:0.5,0) -- (axis cs:0.5,0.225);
-
-    % V(b) - tau*b (Pigouvian Tax)
-    \addplot[smooth, thick, domain=0:0.9, color=red, dashed] {-0.7*x^2 + 0.7*x + 0.05 - 0.2*x};
-    \addlegendentry{$V(b) - \tau b$ (Tax)}
-    \node[pin=135:{$b^{**}_{\text{tax}}$}] at (axis cs:0.357, 0.155) {};
-    \draw[dashed, red] (axis cs:0.357,0) -- (axis cs:0.357,0.155);
-
-    % V(b) with lower kappa (R&D Subsidy)
-    \addplot[smooth, thick, domain=0:0.9, color=green!50!black, dotted] {-0.7*x^2 + 0.4*x + 0.1};
-    \addlegendentry{$V(b)$ with lower $\kappa$ (R\&D)}
-    \node[pin=135:{$b^{**}_{\text{R\&D}}$}] at (axis cs:0.285, 0.157) {};
-    \draw[dashed, green!50!black] (axis cs:0.285,0) -- (axis cs:0.285,0.157);
-    \end{axis}
-\end{tikzpicture}
-\caption{\textbf{Effects of Policy Interventions.} A Pigouvian tax shifts the value function downwards and to the left, reducing optimal bias. An R\&D subsidy that lowers $\kappa$ changes the shape of the value function, also leading to a lower optimal bias.}
-\label{fig:policy}
+    \centering
+    % The path is relative from the 'sections' folder up to the project root, then down to 'figures'
+    \includegraphics[width=1\textwidth]{../figures/figure_2_policy_interventions.png}
+    \caption[Effects of Policy Interventions]{\textbf{Effects of Policy Interventions.} The baseline value function (blue) is maximized at a high private optimum, $b^*=0.991$. An R\&D subsidy that lowers $\kappa$ flattens the value function (green), reducing the optimal bias to $b^*_{\text{R\&D}}=0.376$. A Pigouvian tax (red) makes high levels of bias unprofitable, shifting the optimum to $b^*_{\text{tax}}=0.010$, which is close to the social optimum $b^{**}=0.011$ (orange).}
+    \label{fig:policy}
 \end{figure}
