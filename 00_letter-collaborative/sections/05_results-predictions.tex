@@ -6,9 +6,7 @@ Our theoretical model yields two central results with direct empirical implicati
 \label{prop:existence}
 For any fairness-accuracy trade-off ($\kappa > 0$), a profit-maximizing firm's optimal choice of bias is strictly positive ($b^* > 0$).
 \end{proposition}
-\begin{proof}
-See Appendix A.3. The proof shows that at zero bias, the marginal value of increasing bias is strictly positive ($dV/db|_{b=0} > 0$). Given the concavity of $V(b)$, the optimum must be an interior solution.
-\end{proof}
+
 
 This proposition provides our first key prediction: \textbf{Firms will rationally choose to employ biased algorithms even when groups have identical average productivity and debiasing is costless.} This outcome is not driven by animus or priors, but by the informational value gained from the precision-bias trade-off inherent in the technology.
 
@@ -16,9 +14,6 @@ This proposition provides our first key prediction: \textbf{Firms will rationall
 \label{prop:comparative_static}
 The optimal level of bias $b^*$ is increasing in the severity of the fairness-accuracy trade-off, $\kappa$.
 \end{proposition}
-\begin{proof}
-See Appendix A.4. The proof uses the Implicit Function Theorem on the first-order condition to show that $\partial b^*/\partial\kappa > 0$.
-\end{proof}
 
 This result generates a set of powerful, testable predictions about where and why bias should vary. 
 First, \textbf{firms or industries operating in environments with a steeper trade-off (a higher $\kappa$) will choose higher levels of bias, all else equal.} This might occur in contexts where prediction is inherently more complex or data is less balanced.
@@ -59,7 +54,7 @@ The model's mechanics and the intuition behind these results are summarized in F
     \draw[dashed] (axis cs:0.4,0) -- (axis cs:0.4,0.38); \node[above right] at (axis cs:0.4,0.38) {$t^*$};
 \end{axis}
 \end{tikzpicture}
-\end{subfigure}% <-- No blank line here
+\end{subfigure}
 \hfill
 \begin{subfigure}{0.48\textwidth}
 \begin{tikzpicture}
