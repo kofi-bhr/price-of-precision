@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex main"] 1756055593.41822 "main.aux" "main.bbl" "main" 1756055595.06746 0
+["bibtex main"] 1756149155.87929 "main.aux" "main.bbl" "main" 1756149503.82761 0
   "./references.bib" 1756055521.9956 4398 cbb0c823db8f227bd36af3e24572f203 ""
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "main.aux" 1756055594.792 11530 55522c85c3fa4563c5bc69da5b4b4b26 "pdflatex"
+  "main.aux" 1756149503.50513 11530 55522c85c3fa4563c5bc69da5b4b4b26 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1756055593.51121 "/Users/kofihairralson/Programming Projects/microecon-paper-personal/00_letter-collaborative/main.tex" "main.pdf" "main" 1756055595.0676 0
-  "/Users/kofihairralson/Programming Projects/microecon-paper-personal/00_letter-collaborative/main.tex" 1756055589.70271 2162 96113a38bae88988d4829163e0e16882 ""
+["pdflatex"] 1756149502.02254 "/Users/kofihairralson/Programming Projects/microecon-paper-personal/00_letter-collaborative/main.tex" "main.pdf" "main" 1756149503.8278 0
+  "/Users/kofihairralson/Programming Projects/microecon-paper-personal/00_letter-collaborative/main.tex" 1756149501.76783 2179 050eec36efde9009e49014280fb1305c ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm0700.tfm" 1136768653 1536 73da8e8f1d2a4c957d51ca133585586b ""
@@ -246,10 +246,10 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1754509817 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1741450574 3345740 46b66fdb0378f7bf5921b5eabf1762b8 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "main.aux" 1756055594.792 11530 55522c85c3fa4563c5bc69da5b4b4b26 "pdflatex"
-  "main.bbl" 1756055593.50805 4116 192a21fb30fd52d3117af4c5aa813697 "bibtex main"
-  "main.out" 1756055594.79369 8800 95ebed3cd9f9174293f784e77fab10b1 "pdflatex"
-  "main.tex" 1756055589.70271 2162 96113a38bae88988d4829163e0e16882 ""
+  "main.aux" 1756149503.50513 11530 55522c85c3fa4563c5bc69da5b4b4b26 "pdflatex"
+  "main.bbl" 1756149155.99598 4116 192a21fb30fd52d3117af4c5aa813697 "bibtex main"
+  "main.out" 1756149503.50621 8800 95ebed3cd9f9174293f784e77fab10b1 "pdflatex"
+  "main.tex" 1756149501.76783 2179 050eec36efde9009e49014280fb1305c ""
   "sections/00_abstract.tex" 1756055352.24169 1553 670866217401dde0433c57badf766961 ""
   "sections/01_introduction.tex" 1756055352.24221 5789 c73b90e6eddc0fe892da7732f5b94fbe ""
   "sections/02_lit-review.tex" 1756055352.24285 7412 f3775476a1186463b801b490c64e71a2 ""
