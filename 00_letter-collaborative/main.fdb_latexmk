@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex main"] 1756074634.58074 "main.aux" "main.bbl" "main" 1756077083.03442 0
+["bibtex main"] 1756156774.0454 "main.aux" "main.bbl" "main" 1756156775.27856 0
   "./references.bib" 1756058136.62733 4398 cbb0c823db8f227bd36af3e24572f203 ""
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "main.aux" 1756077082.8008 2251 f16cfc63c79c775e3937234c3d5eb3eb "pdflatex"
+  "main.aux" 1756156775.04868 2251 f16cfc63c79c775e3937234c3d5eb3eb "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1756077081.9112 "/Users/dakshmathapati/price-of-precision/00_letter-collaborative/main.tex" "main.pdf" "main" 1756077083.03455 0
-  "/Users/dakshmathapati/price-of-precision/00_letter-collaborative/main.tex" 1756063021.69885 2169 071bd0d1a08912449e5c66aa99440706 ""
+["pdflatex"] 1756156774.15409 "/Users/dakshmathapati/price-of-precision/00_letter-collaborative/main.tex" "main.pdf" "main" 1756156775.27866 0
+  "/Users/dakshmathapati/price-of-precision/00_letter-collaborative/main.tex" 1756156773.77315 2186 4bdb4790d9ab88c1eb515d82b88e760d ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm0700.tfm" 1136768653 1536 73da8e8f1d2a4c957d51ca133585586b ""
@@ -242,10 +242,10 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1756060822 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1741450574 3345740 46b66fdb0378f7bf5921b5eabf1762b8 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "main.aux" 1756077082.8008 2251 f16cfc63c79c775e3937234c3d5eb3eb "pdflatex"
-  "main.bbl" 1756074634.69259 2826 44701683bc679d169746e6e1d2e1721f "bibtex main"
-  "main.out" 1756077082.80129 538 21edbd0b9d503894995eba332fb5e75c "pdflatex"
-  "main.tex" 1756063021.69885 2169 071bd0d1a08912449e5c66aa99440706 ""
+  "main.aux" 1756156775.04868 2251 f16cfc63c79c775e3937234c3d5eb3eb "pdflatex"
+  "main.bbl" 1756156774.14918 2826 44701683bc679d169746e6e1d2e1721f "bibtex main"
+  "main.out" 1756156775.04909 538 21edbd0b9d503894995eba332fb5e75c "pdflatex"
+  "main.tex" 1756156773.77315 2186 4bdb4790d9ab88c1eb515d82b88e760d ""
   "sections/00_abstract.tex" 1756058136.6276 1553 670866217401dde0433c57badf766961 ""
   "sections/01_introduction.tex" 1756077081.66252 2742 71d13283cafb4bf2cdc9477c7bc962cb ""
   "sections/04_model.tex" 1756074144.11063 2465 f3048b6e97779a6f4f166ad7ee61b5c0 ""
