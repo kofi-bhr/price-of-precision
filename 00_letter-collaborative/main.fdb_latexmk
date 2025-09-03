@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex main"] 1756156774.0454 "main.aux" "main.bbl" "main" 1756156775.27856 0
-  "./references.bib" 1756058136.62733 4398 cbb0c823db8f227bd36af3e24572f203 ""
+["bibtex main"] 1756156774.0454 "main.aux" "main.bbl" "main" 1756164356.5477 0
+  "./references.bib" 1756161311.40047 4398 cbb0c823db8f227bd36af3e24572f203 ""
   "/usr/local/texlive/2025/texmf-dist/bibtex/bst/natbib/plainnat.bst" 1233624470 26816 ffe5423d2019860bad9f54bc402fac15 ""
-  "main.aux" 1756156775.04868 2251 f16cfc63c79c775e3937234c3d5eb3eb "pdflatex"
+  "main.aux" 1756164356.25011 2251 f16cfc63c79c775e3937234c3d5eb3eb "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1756156774.15409 "/Users/dakshmathapati/price-of-precision/00_letter-collaborative/main.tex" "main.pdf" "main" 1756156775.27866 0
-  "/Users/dakshmathapati/price-of-precision/00_letter-collaborative/main.tex" 1756156773.77315 2186 4bdb4790d9ab88c1eb515d82b88e760d ""
+["pdflatex"] 1756164355.03145 "/Users/kofihairralson/Programming Projects/microecon-paper-personal/00_letter-collaborative/main.tex" "main.pdf" "main" 1756164356.54786 0
+  "/Users/kofihairralson/Programming Projects/microecon-paper-personal/00_letter-collaborative/main.tex" 1756161311.39995 2186 4bdb4790d9ab88c1eb515d82b88e760d ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm0700.tfm" 1136768653 1536 73da8e8f1d2a4c957d51ca133585586b ""
@@ -239,18 +239,18 @@
   "/usr/local/texlive/2025/texmf-dist/tex/latex/url/url.sty" 1388531844 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty" 1727642399 55384 b454dec21c2d9f45ec0b793f0995b992 ""
   "/usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf" 1739380943 42148 61becc7c670cd061bb319c643c27fdd4 ""
-  "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1756060822 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
+  "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1754509817 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1741450574 3345740 46b66fdb0378f7bf5921b5eabf1762b8 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "main.aux" 1756156775.04868 2251 f16cfc63c79c775e3937234c3d5eb3eb "pdflatex"
-  "main.bbl" 1756156774.14918 2826 44701683bc679d169746e6e1d2e1721f "bibtex main"
-  "main.out" 1756156775.04909 538 21edbd0b9d503894995eba332fb5e75c "pdflatex"
-  "main.tex" 1756156773.77315 2186 4bdb4790d9ab88c1eb515d82b88e760d ""
-  "sections/00_abstract.tex" 1756058136.6276 1553 670866217401dde0433c57badf766961 ""
-  "sections/01_introduction.tex" 1756077081.66252 2742 71d13283cafb4bf2cdc9477c7bc962cb ""
-  "sections/04_model.tex" 1756074144.11063 2465 f3048b6e97779a6f4f166ad7ee61b5c0 ""
-  "sections/05_results-predictions.tex" 1756074632.82114 5318 9bd8c7a8b11a54c959f0ea48f10800a3 ""
-  "sections/appendix/00_math-appendix.tex" 1756065008.11501 4692 19069fb9bc23b607e4ead99c91817be2 ""
+  "main.aux" 1756164356.25011 2251 f16cfc63c79c775e3937234c3d5eb3eb "pdflatex"
+  "main.bbl" 1756161311.39441 2826 44701683bc679d169746e6e1d2e1721f "bibtex main"
+  "main.out" 1756164356.25064 538 21edbd0b9d503894995eba332fb5e75c "pdflatex"
+  "main.tex" 1756161311.39995 2186 4bdb4790d9ab88c1eb515d82b88e760d ""
+  "sections/00_abstract.tex" 1756161311.40166 1553 670866217401dde0433c57badf766961 ""
+  "sections/01_introduction.tex" 1756161311.40204 2742 71d13283cafb4bf2cdc9477c7bc962cb ""
+  "sections/04_model.tex" 1756161311.40287 2465 f3048b6e97779a6f4f166ad7ee61b5c0 ""
+  "sections/05_results-predictions.tex" 1756161311.40316 5318 9bd8c7a8b11a54c959f0ea48f10800a3 ""
+  "sections/appendix/00_math-appendix.tex" 1756161311.40527 4692 19069fb9bc23b607e4ead99c91817be2 ""
   (generated)
   "main.aux"
   "main.log"
