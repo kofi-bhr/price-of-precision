@@ -1,29 +1,29 @@
-\section{Conditions for Fairness-Accuracy Trade-offs}
+\section{Conditions for fairness-accuracy trade-offs}
 
-We begin by formalizing the fairness-accuracy trade-off as a constrained optimization problem. This approach is standard in the algorithmic fairness literature and allows us to precisely define the conditions under which a trade-off must exist. As established by foundational work in the field (e.g., \citealp{Kleinberg2017, Chouldechova2017}), inherent mathematical constraints often make it impossible to simultaneously satisfy multiple desirable properties, necessitating a trade-off.
+We begin by formalizing the fairness-accuracy trade-off as a constrained optimization problem. This method is standard in the algorithmic fairness literature and lets us precisely define the conditions under which a trade-off must exist. As put forth by foundational work in the field (e.g., \citealp{Kleinberg2017, Chouldechova2017}), innate mathematical constraints often make it impossible to simultaneously fulfill several desirable properties, necessitating a trade-off.
 
-\subsection{The Unconstrained Learning Problem}
+\subsection{The unconstrained learning problem}
 
-Let us consider a standard supervised learning setting. We have a feature space $\mathcal{X}$, a protected group attribute $G \in \{g_0, g_1\}$, and a binary outcome variable $Y \in \{0, 1\}$. A firm or decision-maker wishes to learn a predictive model, or hypothesis, $h$ from a hypothesis space $\mathcal{H}$. The goal of the standard, unconstrained learning problem is to find the hypothesis $h_{acc} \in \mathcal{H}$ that minimizes some expected loss function, $L(h(X), Y)$. This is often referred to as Empirical Risk Minimization (ERM).
+Let us consider a standard supervised learning environment. We have a feature space $\mathcal{X}$, a protected group attribute $G \in \{g_0, g_1\}$, and a binary outcome variable $Y \in \{0, 1\}$. A firm or decision-maker seeks to learn a predictive model, or hypothesis, $h$ from a hypothesis space $\mathcal{H}$. The goal of the standard and unconstrained learning problem is to find the hypothesis $h_{acc} \in \mathcal{H}$ that minimizes some expected loss function, $L(h(X), Y)$. This is called Empirical Risk Minimization, or ERM.
 
 \begin{equation}
 h_{acc} = \arg\min_{h \in \mathcal{H}} \mathbb{E}[L(h(X), Y)]
 \end{equation}
 
-This hypothesis, $h_{acc}$, represents the most accurate possible model within the given hypothesis space, without any consideration for fairness. The loss it achieves, $L_{acc} = \mathbb{E}[L(h_{acc}(X), Y)]$, serves as the benchmark for maximum accuracy.
+This hypothesis, $h_{acc}$, represents the most accurate possible model in the given hypothesis space, without any consideration for fairness. The loss it achieves, $L_{acc} = \mathbb{E}[L(h_{acc}(X), Y)]$, is the benchmark for maximum accuracy.
 
-\subsection{Fairness as a Constraint on the Hypothesis Space}
+\subsection{Fairness as a constraint on the hypothesis space}
 
-We introduce fairness by defining a set of constraints on the behavior of the hypothesis. A fairness metric, such as demographic parity, equalized odds, or calibration, imposes a restriction on the set of acceptable models. We can formalize this by defining a \textit{fair hypothesis space}, $\mathcal{H}_F$, as the subset of hypotheses in $\mathcal{H}$ that satisfy the chosen fairness criterion.
+We introduce fairness by defining some constraints on the hypothesis' behavior. A fairness metric, like demographic parity, or equalized odds, restricts the set of acceptable models. We can formalize this by defining a fair hypothesis space, $\mathcal{H}_F$, as the subset of hypotheses in $\mathcal{H}$ that satisfy the chosen fairness criterion.
 
-\begin{definition}[Fair Hypothesis Space]
-A hypothesis $h$ is considered fair if it satisfies a given fairness constraint, $C(h) \leq \epsilon$ for some tolerance $\epsilon \geq 0$. The set of all such fair hypotheses is:
+\begin{definition}[Fair hypothesis space]
+A hypothesis $h$ is ``fair" if it satisfies a provided fairness constraint, $C(h) \leq \epsilon$ for some tolerance $\epsilon \geq 0$. The set of all such fair hypotheses is:
 \begin{equation}
 \mathcal{H}_F = \{h \in \mathcal{H} \mid C(h) \leq \epsilon \}
 \end{equation}
 \end{definition}
 
-The fairness-constrained learning problem is then to find the best possible hypothesis, $h_{\text{fair}}$, within this restricted set:
+The fairness-constrained learning problem is then to find the best possible hypothesis, $h_{\text{fair}}$, inside of this restricted set:
 
 \begin{equation}
 h_{\text{fair}} = \arg\min_{h \in \mathcal{H}_F} \mathbb{E}[L(h(X), Y)]
@@ -31,22 +31,22 @@ h_{\text{fair}} = \arg\min_{h \in \mathcal{H}_F} \mathbb{E}[L(h(X), Y)]
 
 \subsection{The Existence of a Trade-Off}
 
-A fairness-accuracy trade-off exists if and only if the solution to the constrained problem is strictly worse than the solution to the unconstrained problem. We can define the magnitude of this trade-off, which corresponds to the parameter $\kappa$ in our main model, as follows:
+A fairness-accuracy trade-off exists if and only if the solution to the constrained problem is strictly worse than the solution to the unconstrained problem. We can define the magnitude of this trade-off, which again corresponds to the parameter $\kappa$ in our main model, like such:
 
-\begin{definition}[Fairness-Accuracy Trade-off]
+\begin{definition}[Fairness-accuracy trade-off]
 The fairness-accuracy trade-off, $\kappa_{\text{tradeoff}}$, is the difference in loss between the fairness-constrained optimal hypothesis and the accuracy-optimal hypothesis:
 \begin{equation}
 \kappa_{\text{tradeoff}} = L(h_{\text{fair}}) - L(h_{acc})
 \end{equation}
 \end{definition}
 
-A trade-off exists (i.e., $\kappa_{\text{tradeoff}} > 0$) if and only if the most accurate hypothesis, $h_{acc}$, is not itself fair. That is, if $h_{acc} \notin \mathcal{H}_F$. The subsequent propositions in this section will establish the precise conditions under which this exclusion occurs.
+A trade-off exists (i.e., $\kappa_{\text{tradeoff}} > 0$) if and only if the most accurate hypothesis, $h_{acc}$, is not itself fair. That is, if $h_{acc} \notin \mathcal{H}_F$. The rest of the propositions in this section will set up the precise conditions where this exclusion occurs.
 
-\subsection{Conditions for an Inherent Trade-off}
+\subsection{Conditions for an inherent trade-off}
 
-The fundamental reason for a trade-off arises when the protected attribute $G$ is statistically informative about the outcome $Y$, even after accounting for the other features $X$. To formalize this, let's consider the theoretically most accurate possible classifier, the Bayes Optimal Classifier.
+The fundamental reason for a trade-off comes about when the protected attribute $G$ is statistically informative about the outcome $Y$, even after accounting for the other features $X$. To formalize this, we can consider the theoretically most accurate possible classifier, the Bayes Optimal Classifier.
 
-\begin{definition}[Bayes Optimal Classifier]
+\begin{definition}[Bayes optimal classifier]
 The Bayes Optimal Classifier, $h_{bayes}(x, g)$, predicts the outcome that is most probable given the features and group membership. For a binary outcome, it is defined as:
 \begin{equation}
 h_{bayes}(x, g) = 
@@ -55,12 +55,12 @@ h_{bayes}(x, g) =
 0 & \text{otherwise}
 \end{cases}
 \end{equation}
-This classifier achieves the lowest possible error rate, known as the Bayes error rate.
+This classifier achieves the lowest possible error rate, or the Bayes error rate.
 \end{definition}
 
-Now, let's consider a common fairness constraint: demographic parity. Demographic parity requires that the probability of a positive prediction is the same for all groups. 
+Now, let's think about a common fairness constraint: demographic parity. Demographic parity requires that the probability of a positive prediction is the same for all groups. 
 
-\begin{definition}[Demographic Parity]
+\begin{definition}[Demographic parity]
 A hypothesis $h$ satisfies demographic parity if its predictions are statistically independent of the group attribute $G$. That is:
 \begin{equation}
     \mathbb{P}(h(X,G)=1 | G=g_0) = \mathbb{P}(h(X,G)=1 | G=g_1)
@@ -73,7 +73,7 @@ We can now state the condition for a necessary trade-off.
 If the true conditional probability of the outcome differs across groups (i.e., $\mathbb{P}(Y=1 | G=g_0) \neq \mathbb{P}(Y=1 | G=g_1)$), and the Bayes Optimal Classifier is the only hypothesis that achieves the minimum Bayes error, then any classifier that satisfies demographic parity must have an error rate strictly greater than the Bayes error rate.
 \end{proposition}
 
-\begin{proof}[Proof Sketch]
+\begin{proof}[Proof sketch]
 Let $h_{acc}$ be the accuracy-optimal hypothesis, which we assume is the Bayes Optimal Classifier, $h_{bayes}$. By definition, $h_{bayes}$ uses group membership $g$ in its calculation whenever $\mathbb{P}(Y=1 | X=x, G=g)$ is dependent on $g$.
 
 If the base rates differ between groups (i.e., $\mathbb{P}(Y=1|G=g_0) \neq \mathbb{P}(Y=1|G=g_1)$), then for $h_{bayes}$ to satisfy demographic parity, it would require the unlikely coincidence that integrating over all features $X$ exactly equalizes the prediction rates. 
@@ -83,12 +83,12 @@ More formally, the prediction rate for group $g$ under $h_{bayes}$ is $\int_x \m
 Therefore, if base rates are unequal, the Bayes Optimal Classifier $h_{bayes}$ will not satisfy demographic parity. Any other hypothesis $h_{\text{fair}}$ that does satisfy demographic parity must, by definition, differ from $h_{bayes}$ and will therefore have a strictly higher error rate. This means $h_{acc} \notin \mathcal{H}_F$, which proves that the trade-off $\kappa_{\text{tradeoff}}$ is strictly greater than zero.
 \end{proof}
 
-\subsection{Trade-offs with Error Rate Equality}
+\subsection{Trade-offs with error rate equality}
 
 The trade-off is not unique to demographic parity. A similar conflict arises with another common fairness criterion, Equalized Odds, which focuses on error rates.
 
-\begin{definition}[Equalized Odds]
-A hypothesis $h$ satisfies Equalized Odds if its True Positive Rate (TPR) and False Positive Rate (FPR) are equal across all groups. That is:
+\begin{definition}[Equalized odds]
+A hypothesis $h$ satisfies equalized odds if its True Positive Rate (TPR) and False Positive Rate (FPR) are equal across all groups. That is:
 \begin{align}
 \mathbb{P}(h(X,G)=1 | Y=0, G=g_0) &= \mathbb{P}(h(X,G)=1 | Y=0, G=g_1) \quad \text{(Equal FPR)}
 \end{align}

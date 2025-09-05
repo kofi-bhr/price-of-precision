@@ -49,7 +49,7 @@ This intuition is straightforward for economists familiar with constrained optim
 
 This relationship has been documented empirically across a range of machine learning applications. Studies in hiring algorithms, credit scoring, criminal justice risk assessment, and medical diagnosis consistently show that fairness constraints reduce predictive performance \citep{Kleinberg2017, Chouldechova2017}. The magnitude of this trade-off can vary by domain and algorithm type, but its existence is consistent across contexts.
 
-We formalize this relationship with a functional form motivated by a linear approximation of this constraint (see Appendix B for the micro-foundation).
+We formalize this relationship with a functional form motivated by a linear approximation of this constraint.
 
 \begin{definition}[Precision-Bias Trade-off]
 The variance of the signal noise is given by:
@@ -58,10 +58,11 @@ The variance of the signal noise is given by:
 \end{equation}
 \end{definition}
 
-Here, $b=b_{max}$ describes the most precise but most biased signal, while $b=0$ represents a ``fair" signal with the highest noise. The parameter $\kappa > 0$ describes the steepness of this trade-off, where higher values of $\kappa$ tell that fairness comes at a greater cost to accuracy.\footnote{We use a linear form for tractability, but our central result (that the firm chooses a positive level of bias) only requires that the trade-off function $\sigma_\varepsilon^2(b)$ is downward sloping (i.e., $d\sigma_\varepsilon^2/db < 0$). Insofar as there is any marginal gain in precision from accepting a small amount of bias, a profit-maximizing firm will move away from the zero-bias point. The linear specification lets us derive closed-form solutions and conduct transparent comparative statics, but the core insight holds under any monotonic relationship.}
+Here, $b=b_{max}$ describes the most precise but most biased signal, while $b=0$ represents a ``fair" signal with the highest noise. The parameter $\kappa > 0$ describes the steepness of this trade-off, where higher values of $\kappa$ tell that fairness comes at a greater cost to accuracy.\footnote{We use a linear form for tractability, which allows for closed-form analysis. However, our main result—that a profit-maximizing firm will choose a strictly positive level of bias ($b^*>0$)—holds for any monotonically decreasing trade-off function $\sigma_\varepsilon^2(b)$. As long as there is any marginal gain in precision (i.e., lower noise variance) from accepting a small amount of bias, the firm will move away from the $b=0$ point.}
 
 \subsection{Firm's Problem}
-The firm chooses bias $b$ and threshold $t$ to maximize the expected productivity of its hired workforce. This objective is standard in contexts with fixed hiring quotas or where talent maximization is the primary goal, and wages are fixed or separable.
+The firm chooses bias $b$ and a hiring threshold $t$ to maximize the expected productivity of its hired workforce. This objective is standard in contexts with fixed hiring quotas or where talent maximization is the primary goal, and wages are fixed or separable. The firm's value is given by:
 \begin{equation}
 \max_{b, t} \ \mathbb{E}[U(b,t)] = \sum_{g \in \{0,1\}} \pi_g \int_t^\infty \mathbb{E}[\theta | s, g, b] f(s|g, b) ds
 \end{equation}
+The components of this problem, including the signal distribution $f(s|g,b)$ and the posterior expectation $\mathbb{E}[\theta|s,g,b]$, are formally defined in Appendix A.1.
