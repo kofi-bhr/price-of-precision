@@ -15,6 +15,16 @@ A risk-neutral firm hires candidates. Candidate productivity $\theta$ draws from
 \textbf{Signal and measurement error structure.} The firm observes a signal $s_g$ for a candidate from group $g$. The signal is a function of true productivity $\theta$, a group-specific measurement error $\eta_g$, and the firm's choice of bias $b$. We model the signal as $s_g = \theta + \eta_g + b \cdot g + \varepsilon(b)$. The term $\eta_g \sim N(0, \sigma_{\eta,g}^2)$ represents exogenous and group-specific noise. The firm's choice of $b$ can be interpreted as an adjustment to counteract suspected measurement error, which consequently affects the variance of the overall signal noise, $\varepsilon(b)$.
 \end{assumption}
 
+Given these assumptions, the signal $s_g$ for a candidate from group $g$ is normally distributed. Specifically, the signal distributions are:
+\begin{align*}
+s_0 &\sim \mathcal{N}(\mu, \sigma_\theta^2 + \sigma_\varepsilon^2(b)) \\
+s_1 &\sim \mathcal{N}(\mu + b, \sigma_\theta^2 + \sigma_\varepsilon^2(b))
+\end{align*}
+We denote the conditional probability density function of the signal as $f(s|g,b)$. Using Bayesian updating, the firm's posterior belief about a candidate's productivity, given the signal $s$, group $g$, and bias choice $b$, is:
+\begin{equation}
+\mathbb{E}[\theta|s, g, b] = \frac{\sigma_\theta^2(s - b \cdot \mathbbm{1}_{g=1}) + \sigma_\varepsilon^2(b)\mu}{\sigma_\theta^2 + \sigma_\varepsilon^2(b)}
+\end{equation}
+
 \begin{longtable}{@{}ll@{}}
 \caption{Model Parameters and Notation}
 \label{tab:params}\\

@@ -1,8 +1,8 @@
-\section{Main Results and Predictions}
+\section{Main results and predictions}
 
-Our theoretical model yields two central results with direct empirical implications for the persistence and variation of algorithmic bias. The analysis hinges on the firm's optimization problem, where we formally establish that the profit-maximizing value function, $V(b)$, is strictly concave (see Lemma 3 in the Appendix). This ensures a unique optimum for the level of bias, which we characterize below.
+Our theoretical model yields two main results with empirical implications for the persistence and variation of algorithmic bias. The analysis hinges on the firm's optimization problem, where we put forth that the profit-maximizing value function, $V(b)$, is strictly concave. This ensures a unique optimum for the level of bias, which we characterize below.
 
-\begin{proposition}[Existence of Optimal Bias]
+\begin{proposition}[Existence of optimal bias]
     \label{prop:existence}
     For any fairness-accuracy trade-off ($\kappa > 0$), a profit-maximizing firm's optimal choice of bias is strictly positive ($b^* > 0$).
     \end{proposition}
@@ -10,10 +10,10 @@ Our theoretical model yields two central results with direct empirical implicati
     See Appendix A.3. The proof shows that at zero bias, the marginal value of increasing bias is strictly positive ($dV/db|_{b=0} > 0$). Given the concavity of $V(b)$, the optimum must be greater than zero.
     \end{proof}
     
-    This proposition naturally predicts: \textbf{Firms will rationally choose to employ biased algorithms even when groups have identical average productivity and debiasing is costless.} This outcome is not driven by animus or priors, but by the informational value gained from the precision-bias trade-off inherent in the technology.
+    This proposition naturally predicts: \textbf{Firms will rationally choose to employ biased algorithms even when groups have identical average productivity and debiasing is costless.} This outcome is caused uniquely by the informational value gained from the precision-bias trade-off inherent in the technology.
 
 
-    \begin{proposition}[Comparative Static on the Trade-off]
+    \begin{proposition}[Comparative static on the trade-off]
         \label{prop:comparative_static}
         The optimal level of bias $b^*$ is increasing in the severity of the fairness-accuracy trade-off, $\kappa$.
         \end{proposition}
@@ -31,7 +31,7 @@ The model's mechanics and the intuition behind these results are summarized in F
     \centering
     % The path is relative from the main document's directory
     \includegraphics[width=\textwidth]{../figures/figure_1_model_mechanics.png}
-    \caption[Model Mechanics and Results]{\textbf{Model Mechanics and Results.} 
+    \caption[Model mechanics and results]{\textbf{Model mechanics and results.} 
     Panel (a): The firm's simulated value function $V(b)$ is maximized at a strictly positive bias $b^*=0.978$. 
     Panel (b): The respective fairness-accuracy frontier, with the firm's privately optimal choice marked. 
     Panel (c): The optimal signal distributions for Group 0 (blue) and Group 1 (red). The firm's rational response to bias $b^*$ is to apply a higher effective hiring threshold to Group 1, which leads to disparate impact.
