@@ -29,7 +29,7 @@ The fairness-constrained learning problem is then to find the best possible hypo
 h_{\text{fair}} = \arg\min_{h \in \mathcal{H}_F} \mathbb{E}[L(h(X), Y)]
 \end{equation}
 
-\subsection{The Existence of a Trade-Off}
+\subsection{The existence of a trade-off}
 
 A fairness-accuracy trade-off exists if and only if the solution to the constrained problem is strictly worse than the solution to the unconstrained problem. We can define the magnitude of this trade-off, which again corresponds to the parameter $\kappa$ in our main model, like such:
 
@@ -113,13 +113,13 @@ If the base rates of the positive outcome differ across groups (i.e., $\mathbb{P
 The proof, formally established in \citet{Kleinberg2017}, shows that if a classifier satisfies both calibration and equalized odds, the base rates for each group must be equal. Since the Bayes Optimal Classifier ($h_{acc}$) is perfectly calibrated, if the base rates in the data are unequal, it cannot satisfy Equalized Odds. Therefore, any classifier $h_{\text{fair}}$ that is constrained to satisfy Equalized Odds must deviate from the Bayes Optimal Classifier and will thus have a higher error rate. This again establishes that $h_{acc} \notin \mathcal{H}_F$ (where $\mathcal{H}_F$ is the set of models satisfying Equalized Odds), proving that $\kappa_{\text{tradeoff}} > 0$.
 \end{proof}
 
-\subsection{The Magnitude of the Trade-off: The Fairness Frontier}
+\subsection{The magnitude of the trade-off: The fairness frontier}
 
 The existence of a trade-off is a binary question, but its magnitude is a continuous one. The severity of the trade-off—how much accuracy must be sacrificed for a given gain in fairness—is not a universal constant. It depends critically on the statistical properties of the data. The concept of the ``fairness frontier,'' introduced by \citet{Liang2025}, provides a clear framework for understanding this dependency.
 
 Imagine a space where the axes represent the error rates for each group, $e_{g_0}$ and $e_{g_1}$. An ideal algorithm would have zero error for both groups (the origin). Any given algorithm corresponds to a point in this space.
 
-\begin{definition}[The Fairness Frontier]
+\begin{definition}[The fairness frontier]
 The fairness frontier is the set of non-dominated algorithms. An algorithm is on the frontier if no other algorithm exists that is better for one group without being worse for the other. The point of perfect fairness is where $e_{g_0} = e_{g_1}$.
 \end{definition}
 
