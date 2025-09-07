@@ -11,20 +11,6 @@ s_g &= \theta + b \cdot \mathbf{1}_{g=1} + \varepsilon(b)
 \end{align}
 where $\varepsilon(b) \sim N(0, \sigma_\varepsilon^2(b))$ is a noise term with variance $\sigma_\varepsilon^2(b) = \sigma_0^2 + \kappa(b_{max} - b)$. Under our baseline assumption A1, we assume identical measurement across groups.
 
-\subsubsection{Signal Distributions}
-The observed signals $s_g$ are also normally distributed:
-\begin{align}
-s_0 &\sim N(\mu, \sigma_\theta^2 + \sigma_\varepsilon^2(b)) \\
-s_1 &\sim N(\mu + b, \sigma_\theta^2 + \sigma_\varepsilon^2(b))
-\end{align}
-Let the total signal variance be $\sigma_s^2(b) = \sigma_\theta^2 + \sigma_\varepsilon^2(b) = \sigma_\theta^2 + \sigma_0^2 + \kappa(b_{max} - b)$.
-
-\subsubsection{Posterior Beliefs}
-Using Bayesian updating, the firm's posterior belief is:
-\begin{align}
-E[\theta | s, g, b] &= \frac{\sigma_\theta^2 (s - b \cdot \mathbf{1}_{g=1}) + \sigma_\varepsilon^2(b) \mu}{\sigma_\theta^2 + \sigma_\varepsilon^2(b)} \label{eq:posterior_appendix}
-\end{align}
-
 \subsubsection{Firm's Optimization Problem}
 The firm chooses $b$ and $t$ to maximize the expected productivity of hired workers:
 \begin{align}
@@ -75,7 +61,7 @@ For any $\kappa > 0$, there is a corresponding $\kappa_{\min}>0$. Since $V(b)$ i
 
 \subsection{Proof of Proposition 4: Comparative Static ($\frac{\partial b^*}{\partial \kappa} > 0$)}
 
-The optimal bias $b^*$ satisfies the first-order condition $\frac{dV(b^*)}{db} = 0$. By the Implicit Function Theorem:
+The optimal bias $b^*$ satisfies the first-order condition $\partial V(b^*)/\partial b = 0$. To analyze how $b^*$ changes with $\kappa$, we use the Implicit Function Theorem. The conditions for the theorem are met: $V(b)$ is twice continuously differentiable in $b$ and $\kappa$ because it is constructed from integrals of Normal PDFs, which are smooth functions. Furthermore, the denominator in the resulting expression, $\partial^2 V / \partial b^2$, is strictly negative from Lemma 3, ensuring it is non-zero at the optimum. By the Implicit Function Theorem:
 \begin{align}
 \frac{\partial b^*}{\partial \kappa} = -\frac{\partial^2 V / \partial b \partial \kappa}{\partial^2 V / \partial b^2}\bigg|_{b=b^*}
 \end{align}
@@ -99,6 +85,3 @@ A tax $\tau$ per unit of bias leads to the firm's FOC: $\frac{dV}{db} - \tau = 0
 
 \subsubsection{Alternative Functional Forms}
 Our results hold for a more general precision-bias trade-off, $\sigma_\varepsilon^2(b) = \sigma_0^2 + g(b_{max} - b)$, where $g(\cdot)$ is any increasing, differentiable function. As long as the derivative $g'(\cdot)>0$, the precision effect remains positive, and the core result ($b^*>0$) holds. The linear form is chosen for tractability.
-
-\subsubsection{Heterogeneous Group Means}
-Consider the case where groups have different mean productivities: $\theta_g \sim N(\mu_g, \sigma_\theta^2)$ with $\mu_1 \neq \mu_0$. The informational precision effect remains unchanged. The distortion effect now interacts with the pre-existing difference in means. However, as long as the precision effect is sufficiently strong (i.e., $\kappa$ is large relative to the mean difference $|\mu_1 - \mu_0|$), the firm will still choose an "excess bias" ($b^*>0$) beyond what pure statistical discrimination would justify.
