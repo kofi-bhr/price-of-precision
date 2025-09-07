@@ -1,24 +1,24 @@
-\section{Mathematical Appendix}
+\section{Mathematical appendix}
 
-\subsection{Model Setup and Notation}
+\subsection{Model setup and notation}
 
 Before proving the main results, we establish the complete mathematical framework.
 
-\subsubsection{Signal Structure}
+\subsubsection{Signal structure}
 For a candidate from group $g \in \{0,1\}$ with true productivity $\theta \sim N(\mu, \sigma_\theta^2)$, the firm observes:
 \begin{align}
 s_g &= \theta + b \cdot \mathbf{1}_{g=1} + \varepsilon(b)
 \end{align}
 where $\varepsilon(b) \sim N(0, \sigma_\varepsilon^2(b))$ is a noise term with variance $\sigma_\varepsilon^2(b) = \sigma_0^2 + \kappa(b_{max} - b)$. Under our baseline assumption A1, we assume identical measurement across groups.
 
-\subsubsection{Firm's Optimization Problem}
+\subsubsection{Firm's optimization problem}
 The firm chooses $b$ and $t$ to maximize the expected productivity of hired workers:
 \begin{align}
 V(b,t) &= \sum_{g \in \{0,1\}} \pi_g \int_t^\infty E[\theta | s, g, b] f(s|g,b) \, ds \label{eq:value_function_appendix}
 \end{align}
 For any given $b$, the optimal threshold $t^*(b)$ satisfies $E[\theta | t^*(b), g, b] = \mu$, where $\mu$ is the reservation value.
 
-\subsection{Preliminary Lemmas}
+\subsection{Preliminary lemmas}
 
 \begin{lemma}
 At $b = 0$, the optimal threshold is $t^*(0) = \mu$.
@@ -46,9 +46,9 @@ The firm's value function $V(b)$ is strictly concave in $b$ for $b \in [0, b_{ma
 The second derivative, derived using Leibniz's rule on the firm's value function, is the sum of a "threshold effect" and an "intramarginal effect." Both effects are negative due to the quadratic nature of the precision-bias trade-off, diminishing returns to signal precision, and the increasing marginal cost of signal distortion. Thus, $V''(b) < 0$.
 \end{proof}
 
-\subsection{Proof of Proposition 3: Existence of Optimal Bias ($b^* > 0$)}
+\subsection{Proof of Proposition 3: Existence of optimal bias ($b^* > 0$)}
 
-We evaluate $\frac{dV}{db}$ at $b=0$. From Lemma 1, the hiring threshold is $t^*(0)=\mu$. The derivative consists of a negative \textbf{Distortion Effect} for group 1 and a positive \textbf{Precision Effect} for both groups.
+We evaluate $\frac{dV}{db}$ at $b=0$. From Lemma 1, the hiring threshold is $t^*(0)=\mu$. The derivative consists of a negative distortion effect for group 1 and a positive precision effect for both groups.
 \begin{align}
 \text{Distortion} &= \pi_1 \, \mathbb{E}_{s_1}\left[-\frac{\sigma_\theta^2}{\sigma_s^2(0)} \mathbf{1}_{s_1 \ge \mu}\right] = -\frac{\pi_1 \sigma_\theta^2}{2\sigma_s^2(0)} \\
 \text{Precision} &= \sum_g \pi_g \mathbb{E}_{s_g}\left[ \kappa \frac{E[\theta|s_g,g,0]-\mu}{\sigma_s^2(0)} \mathbf{1}_{s_g \ge \mu} \right] = \frac{\kappa \sigma_\theta^2}{\sigma_s^2(0)\,\sigma_s(0)\,\sqrt{2\pi}}
@@ -59,7 +59,7 @@ The derivative $\frac{dV}{db}\Big|_{b=0}$ is the sum of these two terms. It is p
 \end{align}
 For any $\kappa > 0$, there is a corresponding $\kappa_{\min}>0$. Since $V(b)$ is concave (Lemma 3), a positive slope at $b=0$ implies the optimum $b^*$ must be strictly greater than zero.
 
-\subsection{Proof of Proposition 4: Comparative Static ($\frac{\partial b^*}{\partial \kappa} > 0$)}
+\subsection{Proof of Proposition 4: Comparative static ($\frac{\partial b^*}{\partial \kappa} > 0$)}
 
 The optimal bias $b^*$ satisfies the first-order condition $\partial V(b^*)/\partial b = 0$. To analyze how $b^*$ changes with $\kappa$, we use the Implicit Function Theorem. The conditions for the theorem are met: $V(b)$ is twice continuously differentiable in $b$ and $\kappa$ because it is constructed from integrals of Normal PDFs, which are smooth functions. Furthermore, the denominator in the resulting expression, $\partial^2 V / \partial b^2$, is strictly negative from Lemma 3, ensuring it is non-zero at the optimum. By the Implicit Function Theorem:
 \begin{align}
@@ -70,18 +70,18 @@ From Lemma 3, the denominator is negative. The cross-partial derivative in the n
 \frac{\partial b^*}{\partial \kappa} = -\frac{(+)}{(-)} > 0
 \end{align}
 
-\subsection{Welfare Analysis}
+\subsection{Welfare analysis}
 
-\subsubsection{Social Welfare Function}
+\subsubsection{Social welfare function}
 The social planner maximizes $SWF(b) = V(b) - E(b)$, where $E(b) = \alpha b + \frac{\beta b^2}{2}$ represents the external costs of bias, with $\alpha > 0, \beta \ge 0$.
 
-\subsubsection{Social Optimum}
+\subsubsection{Social optimum}
 The social first-order condition is $\frac{dV}{db} - \alpha - \beta b = 0$. At the social optimum $b^{**}$, we have $\frac{dV}{db}\big|_{b=b^{**}} = \alpha + \beta b^{**} > 0$. Since the private optimum satisfies $\frac{dV}{db}\big|_{b=b^*} = 0$ and $V(b)$ is concave, it must be that $b^{**} < b^*$.
 
-\subsubsection{Optimal Pigouvian Tax}
+\subsubsection{Optimal pigouvian tax}
 A tax $\tau$ per unit of bias leads to the firm's FOC: $\frac{dV}{db} - \tau = 0$. To induce the social optimum, the optimal tax $\tau^*$ must be set equal to the marginal external cost at $b^{**}$, so $\tau^* = \alpha + \beta b^{**}$.
 
-\subsection{Extensions and Robustness}
+\subsection{Extensions and robustness}
 
-\subsubsection{Alternative Functional Forms}
+\subsubsection{Alternative functional forms}
 Our results hold for a more general precision-bias trade-off, $\sigma_\varepsilon^2(b) = \sigma_0^2 + g(b_{max} - b)$, where $g(\cdot)$ is any increasing, differentiable function. As long as the derivative $g'(\cdot)>0$, the precision effect remains positive, and the core result ($b^*>0$) holds. The linear form is chosen for tractability.
