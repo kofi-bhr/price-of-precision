@@ -1,21 +1,23 @@
 \documentclass[12pt,a4paper]{article}
 
-
 % --- PACKAGES ---
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,amsfonts}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage[hyphens]{url}
+\usepackage[normalem]{ulem}
 \usepackage{hyperref}
-\usepackage{comment}
 \hypersetup{
     colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,      
-    urlcolor=blue,
-    citecolor=blue,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=black
 }
+\renewcommand\ULthickness{0.8pt}
+\renewcommand\UrlFont{\uline}
+
+\usepackage{comment}
 \usepackage[authoryear]{natbib}
 \usepackage[autostyle]{csquotes}
 \usepackage{enumitem} 
@@ -24,11 +26,9 @@
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{subcaption}
-\usepackage{hyperref}
+\usepackage{titlesec}
 
-
-\usetikzlibrary{arrows.meta, calc} 
-\usetikzlibrary{intersections}
+\usetikzlibrary{arrows.meta, calc, intersections}
 \usepgfplotslibrary{groupplots}
 
 % --- PGFPLOTS SETUP ---
@@ -43,31 +43,15 @@
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 
-
-
-% --- DOCUMENT METADATA ---
-\title{The Price of Precision: A Model of Optimal Bias on the Fairness-Accuracy Frontier}
-\date{August 2025}
-
-\author{%
-  \begin{tabular}{ccc}
-    Daksh Mathapati & Kofi Hair-Ralston\thanks{We thank David Weinstein, Peter Hull, Alex Imas, and Aislinn Bohren for their invaluable feedback. All remaining errors are our own.}\\
-    \small{\href{mailto:daksh.mathapati@gmail.com}{daksh.mathapati@gmail.com}} & \small{\href{mailto:kofibhairralston@gmail.com}{kofibhairralston@gmail.com}}
-  \end{tabular}
-}
-
+% --- SECTION FORMATTING (16pt, bold, centered) ---
+\titleformat{\section}
+  {\normalfont\bfseries\centering\fontsize{16}{19}\selectfont}
+  {\thesection.}{1em}{}
 
 % --- BEGIN DOCUMENT ---
 \begin{document}
 
-% --- GO TIMEEEEEE ---
-\maketitle
-
-\input{sections/00_abstract.tex}
-
-
-\newpage
-
+% --- MAIN SECTIONS ---
 \input{sections/01_introduction.tex}
 
 %\input{sections/02_lit-review.tex}
@@ -88,11 +72,13 @@
 
 %\input{sections/10_conclusion.tex}
 
+% --- APPENDIX ---
 \appendix
-
 \input{sections/appendix/00_math-appendix.tex}
 
-\bibliographystyle{plainnat}
+% --- REFERENCES ---
+\clearpage
+\bibliographystyle{apalike}
 \bibliography{references}
 
 \end{document}

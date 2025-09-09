@@ -1,4 +1,4 @@
-\section{The Model}
+\section{Model}
 
 A risk-neutral firm hires candidates with productivity $\theta \sim N(\mu, \sigma_\theta^2)$ from groups $g \in \{0, 1\}$. We make three key assumptions to isolate the informational mechanism.
 
@@ -8,7 +8,7 @@ A risk-neutral firm hires candidates with productivity $\theta \sim N(\mu, \sigm
 
 \textbf{Assumption 3 (Signal Structure):} The firm observes signal $s_g = \theta + \eta_g + b \cdot g + \varepsilon(b)$, where $\eta_g \sim N(0, \sigma_{\eta,g}^2)$ is exogenous group-specific noise, $b$ is the firm's bias choice, and $\varepsilon(b) \sim N(0, \sigma_\varepsilon^2(b))$ represents algorithmic noise that depends on bias level.
 
-The model's core mechanism is a trade-off between signal precision and bias. Fairness constraints in machine learning act as regularizers, increasing estimator variance \citep{Kamishima2012, Wick2019}. This creates a fundamental tension: algorithms can be made fairer, but only at the cost of reduced accuracy. We formalize this relationship as:
+The model's core mechanism is a trade-off between signal precision and bias. Fairness constraints in machine learning act as regularizers, increasing estimator variance \citet{Kamishima2012,Wick2019}. This creates a fundamental tension: algorithms can be made fairer, but only at the cost of reduced accuracy. We formalize this relationship as:
 
 \begin{equation}
 \sigma_\varepsilon^2(b) = \sigma_0^2 + \kappa(b_{max} - b) \quad \text{for } b \in [0, b_{max}]

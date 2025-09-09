@@ -1,5 +1,6 @@
 \appendix
-\section{Mathematical Appendix}
+\clearpage
+\section{Mathematical appendix}
 
 \textbf{Model Setup:} For candidate from group $g \in \{0,1\}$ with productivity $\theta \sim N(\mu, \sigma_\theta^2)$, the firm observes signal $s_g = \theta + b \cdot \mathbf{1}_{g=1} + \varepsilon(b)$ where $\varepsilon(b) \sim N(0, \sigma_\varepsilon^2(b))$ and $\sigma_\varepsilon^2(b) = \sigma_0^2 + \kappa(b_{max} - b)$. Under our baseline assumption of identical group productivity, the signals follow:
 \begin{align}
@@ -20,60 +21,55 @@ V(b,t) = \sum_{g \in \{0,1\}} \pi_g \int_t^\infty E[\theta | s, g, b] f(s|g,b) \
 \end{equation}
 For any given $b$, the optimal threshold $t^*(b)$ satisfies $E[\theta | t^*(b), g, b] = \mu$.
 
-\begin{lemma}[Threshold Symmetry]
+\begin{lemma}
 At $b = 0$, the optimal threshold is $t^*(0) = \mu$.
 \end{lemma}
 \begin{proof}
-At $b = 0$, both groups have identical signal distributions. The posterior expectation is:
-\begin{equation}
-E[\theta | t^*(0), g, 0] = \frac{\sigma_\theta^2 t^*(0) + \sigma_\varepsilon^2(0) \mu}{\sigma_\theta^2 + \sigma_\varepsilon^2(0)}
-\end{equation}
-Setting equal to the reservation value $\mu$ and solving yields $t^*(0) = \mu$.
+At $b = 0$, both groups have identical signal distributions. A risk-neutral firm hires when $E[\theta|s,g,b] \geq \mu$. The threshold $t^*$ is where $E[\theta|t^*, g, b] = \mu$.
+At $b=0$, the posterior is $E[\theta | t^*(0), g, 0] = \frac{\sigma_\theta^2 t^*(0) + \sigma_\varepsilon^2(0) \mu}{\sigma_\theta^2 + \sigma_\varepsilon^2(0)}$. Setting this to $\mu$ and solving gives $t^*(0)=\mu$.
 \end{proof}
 
-\begin{lemma}[Posterior Derivatives]
+\begin{lemma}
 The partial derivatives of the posterior mean are:
 \begin{align}
 \frac{\partial E[\theta | s, g, b]}{\partial b} &= -\frac{\sigma_\theta^2 \mathbf{1}_{g=1}}{\sigma_s^2(b)} + \kappa \frac{E[\theta|s,g,b] - \mu}{\sigma_s^2(b)} \\
 \frac{\partial E[\theta | s, g, b]}{\partial \sigma_\varepsilon^2} &= \frac{\sigma_\theta^2(\mu - s + b \cdot \mathbf{1}_{g=1})}{(\sigma_s^2(b))^2}
 \end{align}
 \end{lemma}
-
-\begin{lemma}[Concavity of Value Function]
-The firm's value function $V(b)$ is strictly concave: $\frac{d^2V}{db^2} < 0$.
-\end{lemma}
 \begin{proof}
-Using the Envelope Theorem, the first derivative is:
-\begin{equation}
-V'(b) = \sum_{g \in \{0,1\}} \pi_g \int_{t^*(b)}^\infty \frac{\partial E[\theta|s,g,b]}{\partial b} f(s|g,b) \, ds
-\end{equation}
-Differentiating with Leibniz's rule and using the quadratic nature of the bias-precision tradeoff, both the threshold effect and intramarginal effect are negative. Therefore $V''(b) < 0$.
+These follow from applying the quotient rule to \eqref{eq:posterior} and noting that $\frac{\partial \sigma_\varepsilon^2}{\partial b} = -\kappa$.
 \end{proof}
 
-\textbf{Proof of Proposition 1 (Existence of Optimal Bias):} We evaluate $\frac{dV}{db}$ at $b=0$. From the threshold symmetry lemma, $t^*(0)=\mu$, so we hire candidates with $s \geq \mu$.
+\begin{lemma}[Concavity of the Value Function]
+The firm's value function $V(b)$ is strictly concave in $b$ for $b \in [0, b_{max}]$. That is, $\frac{d^2V}{db^2} < 0$.
+\end{lemma}
+\begin{proof}
+The second derivative, derived using Leibniz's rule on the firm's value function, is the sum of a "threshold effect" and an "intramarginal effect." Both effects are negative due to the quadratic nature of the precision-bias trade-off, diminishing returns to signal precision, and the increasing marginal cost of signal distortion. Thus, $V''(b) < 0$.
+\end{proof}
+    
 
-The distortion effect for group 1 is:
-\begin{equation}
-\text{Distortion} = \pi_1 \, \mathbb{E}_{s_1}\left[-\frac{\sigma_\theta^2}{\sigma_s^2(0)} \mathbf{1}_{s_1 \geq \mu}\right] = -\frac{\pi_1 \sigma_\theta^2}{2\sigma_s^2(0)}
-\end{equation}
+\clearpage
+\setlength{\parindent}{0pt} 
+\subsection{Proof of Proposition 1: Existence of optimal bias ($b^* > 0$)}
+We evaluate $\frac{dV}{db}$ at $b=0$. From Lemma 1, the hiring threshold is $t^*(0)=\mu$. The derivative consists of a negative distortion effect for group 1 and a positive precision effect for both groups.
+\begin{align}
+\text{Distortion} &= \pi_1 \, \mathbb{E}_{s_1}\left[-\frac{\sigma_\theta^2}{\sigma_s^2(0)} \mathbf{1}_{s_1 \ge \mu}\right] = -\frac{\pi_1 \sigma_\theta^2}{2\sigma_s^2(0)} \\
+\text{Precision} &= \sum_g \pi_g \mathbb{E}_{s_g}\left[ \kappa \frac{E[\theta|s_g,g,0]-\mu}{\sigma_s^2(0)} \mathbf{1}_{s_g \ge \mu} \right] = \frac{\kappa \sigma_\theta^2}{\sigma_s^2(0)\,\sigma_s(0)\,\sqrt{2\pi}}
+\end{align}
+The derivative $\frac{dV}{db}\Big|_{b=0}$ is the sum of these two terms. It is positive if and only if:
+\begin{align}
+\kappa \geq \pi_1 \sigma_s(0) \sqrt{\tfrac{\pi}{2}} \;\equiv\; \kappa_{\min}
+\end{align}
+For any $\kappa > 0$, there is a corresponding $\kappa_{\min}>0$. Since $V(b)$ is concave (Lemma 3), a positive slope at $b=0$ implies the optimum $b^*$ must be strictly greater than zero.
 
-The precision effect for both groups is:
-\begin{equation}
-\text{Precision} = \kappa \, \frac{\sigma_\theta^2}{(\sigma_s^2(0))^2} \, \mathbb{E}_{s,g}\left[(s-\mu)\mathbf{1}_{s \geq \mu}\right]
-\end{equation}
-For $N(\mu,\sigma_s^2(0))$, we have $\mathbb{E}[(s-\mu)\mathbf{1}_{s \geq \mu}] = \frac{\sigma_s(0)}{\sqrt{2\pi}}$, so:
-\begin{equation}
-\text{Precision} = \frac{\kappa \sigma_\theta^2}{\sigma_s^2(0)\sigma_s(0)\sqrt{2\pi}}
-\end{equation}
+\vspace*{1em}
+\subsection{Proof of Proposition 2: Comparative static ($\frac{\partial b^*}{\partial \kappa} > 0$)}
 
-The net effect at $b=0$ is:
-\begin{equation}
-\frac{dV}{db}\Big|_{b=0} = -\frac{\pi_1 \sigma_\theta^2}{2\sigma_s^2(0)} + \frac{\kappa \sigma_\theta^2}{\sigma_s^2(0)\sigma_s(0)\sqrt{2\pi}}
-\end{equation}
-This is positive when $\kappa \geq \pi_1 \sigma_s(0) \sqrt{\pi/2} \equiv \kappa_{\min}$. Combined with concavity, this implies $b^* > 0$ for $\kappa \geq \kappa_{\min}$. $\square$
-
-\textbf{Proof of Proposition 2 (Comparative Static):} The optimal bias $b^*$ satisfies $\frac{dV(b^*)}{db} = 0$. By the Implicit Function Theorem:
-\begin{equation}
-\frac{\partial b^*}{\partial \kappa} = -\frac{\frac{\partial^2 V}{\partial b \partial \kappa}}{\frac{\partial^2 V}{\partial b^2}}\bigg|_{b=b^*}
-\end{equation}
-Since $V$ is concave, $\frac{\partial^2 V}{\partial b^2} < 0$. The cross-partial $\frac{\partial^2 V}{\partial b \partial \kappa} > 0$ because for hired candidates, the precision effect is positive. Therefore $\frac{\partial b^*}{\partial \kappa} > 0$. $\square$
+The optimal bias $b^*$ satisfies the first-order condition $\partial V(b^*)/\partial b = 0$. To analyze how $b^*$ changes with $\kappa$, we use the Implicit Function Theorem. The conditions for the theorem are met: $V(b)$ is twice continuously differentiable in $b$ and $\kappa$ because it is constructed from integrals of Normal PDFs, which are smooth functions. Furthermore, the denominator in the resulting expression, $\partial^2 V / \partial b^2$, is strictly negative from Lemma 3, ensuring it is non-zero at the optimum. By the Implicit Function Theorem:
+\begin{align}
+\frac{\partial b^*}{\partial \kappa} = -\frac{\partial^2 V / \partial b \partial \kappa}{\partial^2 V / \partial b^2}\bigg|_{b=b^*}
+\end{align}
+From Lemma 3, the denominator is negative. The cross-partial derivative in the numerator, $\frac{\partial^2 V}{\partial b \partial \kappa}$, is positive because a larger $\kappa$ (a steeper trade-off) increases the marginal benefit of bias for all hired candidates. Therefore:
+\begin{align}
+\frac{\partial b^*}{\partial \kappa} = -\frac{(+)}{(-)} > 0
+\end{align}
